@@ -2,11 +2,9 @@
 name: code-checker
 description: Checks and fixes format, lint, and TypeScript errors with minimal, safe changes. Uses best practices. No workarounds.
 tools: [Bash, Grep, Read, Edit, Write, WebSearch]
+skills: caveman
+color: red
 ---
-
-## Why
-
-Code quality drifts fast. Catching and fixing format, lint, and type issues early keeps the codebase healthy without piling on tech debt.
 
 ## How
 

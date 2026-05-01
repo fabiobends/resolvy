@@ -1,6 +1,6 @@
 ---
 name: create-hook
-description: Create a new hook script and register it in settings.json. Follows the project's bash script pattern with concise status messages.
+description: Create or add a new hook script and register it in settings.json. Follows the project's bash script pattern with concise status messages.
 ---
 
 # Create Hook
