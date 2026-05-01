@@ -1,3 +1,4 @@
+/** Ordered list of semantic color token keys used in the theme. */
 export const themeColorKeys = [
   "primary",
   "onPrimary",
@@ -54,29 +55,20 @@ const darkColors = {
   overlay: "rgba(0, 0, 0, 0.5)",
 } as const satisfies Record<ThemeColor, string>;
 
+/** Light and dark color palettes keyed by semantic token. */
 export const Colors = {
   light: lightColors,
   dark: darkColors,
 };
 
-export const Fonts = {
-  sans: "system-ui, sans-serif",
-  serif: "serif",
-  rounded: "sans-serif",
-  mono: "monospace",
-};
-
-export const sizeKeys = [
-  "tiny",
-  "extraSmall",
-  "small",
-  "medium",
-  "large",
-  "extraLarge",
-  "huge",
-] as const;
-
-export type SizeKey = (typeof sizeKeys)[number];
+type SizeKey =
+  | "tiny"
+  | "extraSmall"
+  | "small"
+  | "medium"
+  | "large"
+  | "extraLarge"
+  | "huge";
 
 function createSpacing(tiny: number, extraSmall: number) {
   const m = extraSmall / tiny;
@@ -111,8 +103,13 @@ function createSizes(tiny: number, extraSmall: number) {
   } as const satisfies Record<SizeKey, number>;
 }
 
+/** Multiplicative spacing scale for margins and paddings. */
 export const Spacing = createSpacing(2, 4);
+
+/** Fibonacci-like sizing scale for component dimensions. */
 export const Sizes = createSizes(8, 12);
+
+/** Typography size scale mapped to semantic size keys. */
 export const FontSizes = {
   tiny: 10,
   extraSmall: 12,
@@ -123,6 +120,7 @@ export const FontSizes = {
   huge: 32,
 } as const satisfies Record<SizeKey, number>;
 
+/** Line height scale paired with each font size token. */
 export const LineHeights = {
   tiny: 14,
   extraSmall: 16,
