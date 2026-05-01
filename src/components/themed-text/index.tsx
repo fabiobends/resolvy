@@ -11,12 +11,12 @@ import { ThemedTextProps } from "./types";
  * @returns React element.
  */
 export function ThemedText(props: ThemedTextProps) {
-  const { type, themeColor, ...rest } = props;
+  const { type, themeColor, style, ...rest } = props;
   const theme = useTheme();
 
   return (
     <Text
-      style={[{ color: theme[themeColor] }, styles[type], rest.style]}
+      style={[{ color: theme[themeColor] }, styles[type], style]}
       {...rest}
     />
   );
