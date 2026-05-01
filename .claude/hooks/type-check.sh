@@ -13,7 +13,4 @@ if [[ "$f" == *.ts || "$f" == *.tsx ]]; then
 }
 EOF
   bunx tsc --noEmit --project "$tmpfile" >&2
-  exit 2
 fi
-
-exit 0
