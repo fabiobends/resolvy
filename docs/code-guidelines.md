@@ -25,7 +25,7 @@ Every piece with enough surface area lives in its own folder:
   constants.ts # Local constants
   styles.ts # StyleSheet or styled definitions
   utils.ts # Helper functions
-  piece.test.(ts|tsx) # Tests (next to code)
+  index.test.(ts|tsx) # Tests for the main export
   /components # Sub-components
   /hooks # Local hooks
     use-thing.ts
@@ -100,5 +100,5 @@ Examples in the codebase:
 
 - Every exported function, class, and non-trivial logic branch must have unit tests.
 - **Dev-tool only code** (lint rules, build scripts, etc.) is exempt from this requirement.
-- Place tests next to the code they test: `piece.test.(ts|tsx)`.
+- Place tests next to the code they test: `index.test.(ts|tsx)` for main exports, or mirror the exact source file name (e.g. `use-thing.test.ts`).
 - Run `bun run test` after changes and fix all failures before finishing.

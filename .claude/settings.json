@@ -13,7 +13,7 @@
       }
     ]
   },
-  "TaskCompleted": {
+  "Stop": {
     "hooks": [
       {
         "type": "agent",

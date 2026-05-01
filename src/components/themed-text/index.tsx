@@ -2,10 +2,8 @@ import { Text } from "react-native";
 
 import { useTheme } from "@/hooks/use-theme";
 
-import { textStyles } from "./styles";
+import { styles } from "./styles";
 import { ThemedTextProps } from "./types";
-
-export { type TextType, type ThemedTextProps } from "./types";
 
 /**
  * Renders text with theme colors and typography.
@@ -18,7 +16,7 @@ export function ThemedText(props: ThemedTextProps) {
 
   return (
     <Text
-      style={[{ color: theme[themeColor] }, textStyles[type], rest.style]}
+      style={[{ color: theme[themeColor] }, styles[type], rest.style]}
       {...rest}
     />
   );
