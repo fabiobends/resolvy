@@ -1,39 +1,9 @@
-import { StyleSheet, Text, type TextProps } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { useTheme } from "@/hooks/use-theme";
-import { ThemeColor, FontSizes, LineHeights } from "@/constants/theme";
+import { FontSizes, LineHeights } from "@/constants/theme";
 
-export type TextType =
-  | "caption"
-  | "label"
-  | "bodySmall"
-  | "body"
-  | "subtitle"
-  | "title"
-  | "display";
-
-export type ThemedTextProps = TextProps & {
-  type: TextType;
-  themeColor: ThemeColor;
-};
-
-export function ThemedText({
-  style,
-  type,
-  themeColor,
-  ...rest
-}: ThemedTextProps) {
-  const theme = useTheme();
-
-  return (
-    <Text
-      style={[{ color: theme[themeColor] }, styles[type], style]}
-      {...rest}
-    />
-  );
-}
-
-const styles = StyleSheet.create({
+/** Typography style presets for each text variant. */
+export const textStyles = StyleSheet.create({
   caption: {
     fontSize: FontSizes.tiny,
     lineHeight: LineHeights.tiny,

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react-native";
-import React from "react";
-import { ThemedText } from "../themed-text";
+
+import { ThemedText } from "./index";
 
 describe("ThemedText", () => {
   it("renders with correct text", () => {
