@@ -25,10 +25,3 @@ src/
 assets/
   images/            # Static image assets
 ```
-
-## Code Style
-
-- Use **Themed** components (`@/components/themed-*.tsx`).
-- Use comments sparingly, only business logic.
-- **Path aliases** — import from `@/components/...` and `@/constants/...`. Do not use relative paths.
-- **No dead code** — remove unused imports, components, and dependencies immediately. Keep the codebase minimal.
