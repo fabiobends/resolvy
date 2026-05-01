@@ -5,11 +5,15 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/constants/theme";
 
+/**
+ * Renders the welcome screen for the app.
+ * @returns React element.
+ */
 export default function HomeScreen() {
   return (
-    <ThemedView type="surface" style={styles.container}>
+    <ThemedView color="surface" style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView type="surfaceDim" style={styles.card}>
+        <ThemedView color="surfaceDim" style={styles.card}>
           <ThemedText type="title" themeColor="onSurface" style={styles.title}>
             Welcome
           </ThemedText>

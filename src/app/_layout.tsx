@@ -4,9 +4,12 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
-import React from "react";
 import { useColorScheme } from "react-native";
 
+/**
+ * Provides root navigation stack for app.
+ * @returns React element.
+ */
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
