@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-native";
 
 import { Spacing } from "@/constants/theme";
 
-import { ThemedView } from "./index";
 import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "./index";
 
 const meta: Meta<typeof ThemedView> = {
   title: "ThemedView",
@@ -17,83 +17,97 @@ type Story = StoryObj<typeof ThemedView>;
 export const Surface: Story = {
   args: {
     color: "surface",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onSurface">
         Surface background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
 
 export const SurfaceDim: Story = {
   args: {
     color: "surfaceDim",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onSurface">
         Surface Dim background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
 
 export const SurfaceBright: Story = {
   args: {
     color: "surfaceBright",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onSurface">
         Surface Bright background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
 
 export const Primary: Story = {
   args: {
     color: "primary",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onPrimary">
         Primary background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
 
 export const Secondary: Story = {
   args: {
     color: "secondary",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onSecondary">
         Secondary background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
 
 export const Success: Story = {
   args: {
     color: "success",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onSuccess">
         Success background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
 
 export const Warning: Story = {
   args: {
     color: "warning",
-    children: (
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
+  },
+  render: (args) => (
+    <ThemedView {...args}>
       <ThemedText type="body" themeColor="onWarning">
         Warning background
       </ThemedText>
-    ),
-    style: { padding: Spacing.medium, borderRadius: Spacing.small },
-  },
+    </ThemedView>
+  ),
 };
