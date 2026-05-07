@@ -1,13 +1,13 @@
 import { Colors } from "@/constants/theme";
-import { useColorScheme } from "react-native";
+
+import { useThemeContext } from "./context";
 
 /**
- * Returns active theme color palette based on device color scheme.
+ * Returns active theme color palette based on user preference or device color scheme.
  * @returns Color palette object for current theme.
  */
 export function useTheme() {
-  const scheme = useColorScheme();
-  const theme = scheme === "unspecified" || scheme === "dark" ? "dark" : scheme;
+  const { activeTheme } = useThemeContext();
 
-  return Colors[theme];
+  return Colors[activeTheme];
 }
