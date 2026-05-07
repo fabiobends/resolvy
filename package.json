@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
+    "android": "expo run:android",
+    "ios:dev": "expo start --ios",
+    "android:dev": "expo start --android",
     "web": "expo start --web",
     "lint": "expo lint --fix",
     "lint:check": "expo lint",
@@ -32,9 +34,14 @@
     "react-native-web": "~0.21.0"
   },
   "devDependencies": {
+    "@storybook/addon-ondevice-actions": "^10.4.0",
+    "@storybook/addon-ondevice-backgrounds": "^10.4.0",
+    "@storybook/addon-ondevice-controls": "^10.4.0",
+    "@storybook/react-native": "^10.4.0",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^30.0.0",
     "@types/react": "~19.2.2",
+    "@typescript-eslint/utils": "^8.59.2",
     "eslint": "^9.0.0",
     "eslint-config-expo": "~55.0.0",
     "husky": "^9.1.7",
