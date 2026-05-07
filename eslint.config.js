@@ -21,6 +21,13 @@ module.exports = defineConfig([
     plugins: {
       "@typescript-eslint": tseslint,
     },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+        },
+      },
+    },
     rules: {
       "@typescript-eslint/no-deprecated": "error",
     },
