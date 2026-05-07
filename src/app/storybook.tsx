@@ -1,23 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StorybookScreen } from "@/features/storybook/screen";
 
-import { SafeAreaView } from "react-native-safe-area-context";
-import Constants from "expo-constants";
-
-import { view } from "../../.storybook/storybook.requires";
-
-const StorybookUIRoot = view.getStorybookUI({});
-
-export default function StorybookScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <StorybookUIRoot />
-    </SafeAreaView>
-  );
+export default function StorybookRoute() {
+  return <StorybookScreen />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-  },
-});
