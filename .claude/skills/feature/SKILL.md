@@ -1,5 +1,5 @@
 ---
-name: create-feature
+name: feature
 description: Generate a new feature/screen following the Resolvy composition pattern. Use when creating a new route with orchestrator hook, modules, and a thin Expo Router entry point.
 ---
 

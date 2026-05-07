@@ -1,5 +1,5 @@
 ---
-name: create-component
+name: component
 description: Generate a new shared component in src/components/ following Resolvy conventions. Use when creating a reusable UI component.
 ---
 

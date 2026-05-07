@@ -7,23 +7,25 @@
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/type-check.sh",
-            "statusMessage": "Running type check..."
+            "statusMessage": "Running type check"
           },
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/lint-check.sh",
-            "statusMessage": "Running lint check..."
+            "statusMessage": "Running lint check"
           }
         ]
       }
-    ]
-  },
-  "Stop": {
-    "hooks": [
+    ],
+    "Stop": [
       {
-        "type": "agent",
-        "prompt": "Use agents/code-shaper.md to check code shape and style.",
-        "statusMessage": "Running code shaper agent..."
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "Use agents/code-shaper.md to check code shape and style.",
+            "statusMessage": "Running code shaper agent"
+          }
+        ]
       }
     ]
   }

@@ -1,5 +1,5 @@
 ---
-name: create-module
+name: module
 description: Generate a new module inside a feature following Resolvy conventions. Use when adding business logic, UI, and tests for a new feature section.
 ---
 

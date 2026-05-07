@@ -1,5 +1,5 @@
 ---
-name: create-commit
+name: commit
 description: Create conventional commits from files. Split into small, meaningful commits when changes span multiple concerns.
 ---
 

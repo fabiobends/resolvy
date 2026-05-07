@@ -1,19 +1,25 @@
 ---
-name: create-hook
-description: Create or add a new hook script and register it in settings.json. Follows the project's bash script pattern with concise status messages.
+name: agent-hook
+description: Create or register a hook in settings.json. Covers all hook types (command, prompt, agent, http, mcp_tool) and events.
 ---
 
-# Create Hook
+# Create or Register Hook
 
-Use this skill when user asks to create a new hook that runs on file changes or tool use.
+Use this skill when the user asks to create, add, or register any hook in a Claude Code project.
 
-## Pattern
+## Hook Types
 
-1. Bash script in `$CLAUDE_PROJECT_DIR/.claude/hooks/<name>.sh`
-2. Entry in `.claude/settings.json` under one of the hook categories
-3. Concise `statusMessage`
+Claude Code supports five hook handler types:
 
-## Hook Categories
+| Type       | Description                               | Best For                               |
+| ---------- | ----------------------------------------- | -------------------------------------- |
+| `command`  | Shell script or binary                    | Linting, blocking, formatting, logging |
+| `prompt`   | Single-turn LLM evaluation (returns `ok`) | Semantic judgment, quality gates       |
+| `agent`    | Spawn a subagent with tool access         | Complex verification, file inspection  |
+| `http`     | POST JSON to an external endpoint         | External services, audit, webhooks     |
+| `mcp_tool` | Call a tool on an already-connected MCP   | Security scans, external validations   |
+
+## Hook Events
 
 | Category              | When it fires                                                               | Use for                                   |
 | --------------------- | --------------------------------------------------------------------------- | ----------------------------------------- |
@@ -47,25 +53,91 @@ Use this skill when user asks to create a new hook that runs on file changes or 
 | `ElicitationResult`   | After user responds to MCP elicitation                                      | Process result before sending             |
 | `SessionEnd`          | When a session terminates                                                   | Cleanup, logging                          |
 
-## Settings Entry
+## Settings Entry Examples
+
+### Command Hook
 
 ```json
 {
-  "type": "command",
-  "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/<name>.sh",
-  "statusMessage": "<short message>..."
+  "matcher": "Write|Edit",
+  "hooks": [
+    {
+      "type": "command",
+      "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/type-check.sh",
+      "statusMessage": "Running type check"
+    }
+  ]
+}
+```
+
+### Prompt Hook
+
+```json
+{
+  "hooks": [
+    {
+      "type": "prompt",
+      "prompt": "Evaluate if all tasks are complete. If not, respond with {\"ok\": false, \"reason\": \"what remains\"}.",
+      "timeout": 30
+    }
+  ]
+}
+```
+
+### Agent Hook
+
+```json
+{
+  "hooks": [
+    {
+      "type": "agent",
+      "prompt": "Verify that all unit tests pass. Run the test suite. $ARGUMENTS",
+      "timeout": 120
+    }
+  ]
+}
+```
+
+### HTTP Hook
+
+```json
+{
+  "hooks": [
+    {
+      "type": "http",
+      "url": "https://hooks.example.com/audit",
+      "headers": { "Authorization": "Bearer $HOOK_TOKEN" }
+    }
+  ]
+}
+```
+
+### MCP Tool Hook
+
+```json
+{
+  "hooks": [
+    {
+      "type": "mcp_tool",
+      "server": "my_server",
+      "tool": "security_scan",
+      "input": { "file_path": "${tool_input.file_path}" }
+    }
+  ]
 }
 ```
 
 ## Rules
 
-- Use `jq` to extract file path from stdin JSON.
-- Filter by extension or matcher. Don't run on every file.
-- Prefer `bunx` over global binaries.
-- Status message max 4 words, ends with `...`.
-- Make script executable with `chmod +x`.
+- **Command hooks**: use `jq` to extract file path from stdin JSON. Filter by extension or matcher. Prefer `bunx` over global binaries. Make script executable with `chmod +x`.
+- **Prompt/Agent hooks**: return `{"ok": true/false, "reason": "..."}` via stdout.
+- **HTTP hooks**: Claude POSTs the event JSON to the URL. Response can return decisions in the same format as command hooks.
+- **MCP hooks**: the server must already be connected via MCP.
+- **Status message**: max 4 words, ends with `...` (command hooks only).
+- **Async**: only command hooks support `"async": true`.
+- **Filtering**: use `"matcher"` for tool name filtering and `"if"` for argument-level filtering (e.g. `"if": "Bash(rm *)"`).
 
-## Example
+## Command Hook Example
 
 **type-check.sh**
 
@@ -97,7 +169,7 @@ fi
     {
       "type": "command",
       "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/type-check.sh",
-      "statusMessage": "Running type check..."
+      "statusMessage": "Running type check"
     }
   ]
 }
