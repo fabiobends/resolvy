@@ -8,6 +8,11 @@
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/type-check.sh",
             "statusMessage": "Running type check..."
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/deprecation-check.sh",
+            "statusMessage": "Running deprecation check..."
           }
         ]
       }
