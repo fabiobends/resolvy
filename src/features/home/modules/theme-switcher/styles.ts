@@ -1,19 +1,18 @@
 import { StyleSheet } from "react-native";
 
-import { Spacing } from "@/constants/theme";
+import { Sizes, Spacing } from "@/constants/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    flexDirection: "row",
     alignItems: "center",
-    padding: Spacing.medium,
+    gap: Spacing.small,
   },
-  safeArea: {
-    flex: 1,
+  button: {
+    width: Sizes.large,
+    height: Sizes.large,
+    borderRadius: Sizes.large / 2,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
-    gap: Spacing.large,
   },
 });

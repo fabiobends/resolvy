@@ -1,3 +1,4 @@
+import { useThemeSwitcherModule } from "./modules/theme-switcher/use-module";
 import { useWelcomeModule } from "./modules/welcome/use-module";
 import { HomeScreenProps } from "./types";
 
@@ -6,6 +7,7 @@ import { HomeScreenProps } from "./types";
  * @returns Flat object mapping to child component props.
  */
 export function useHomeScreen(): HomeScreenProps {
+  const themeSwitcherProps = useThemeSwitcherModule();
   const welcomeProps = useWelcomeModule();
-  return { welcomeProps };
+  return { themeSwitcherProps, welcomeProps };
 }
