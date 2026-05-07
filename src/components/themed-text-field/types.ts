@@ -1,9 +1,9 @@
 import { TextInputProps } from "react-native";
 
-export type ColorVariant = "primary" | "secondary" | "success" | "warning";
+import { VariantColor } from "@/types/colors";
 
 export type ThemedTextFieldProps = TextInputProps & {
   label: string;
-  color: ColorVariant;
+  color: VariantColor;
   disabled?: boolean;
 };

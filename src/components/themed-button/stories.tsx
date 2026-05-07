@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-native";
 
-import { Spacing, Sizes } from "@/constants/theme";
+import { Sizes, Spacing } from "@/constants/theme";
 
-import { ThemedButton } from "./index";
 import { ThemedView } from "@/components/themed-view";
+import { ThemedButton } from "./index";
 
 const meta: Meta<typeof ThemedButton> = {
   title: "ThemedButton",

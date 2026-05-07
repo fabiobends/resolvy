@@ -1,10 +1,10 @@
 import { PressableProps } from "react-native";
 
-export type ColorVariant = "primary" | "secondary" | "success" | "warning";
+import { VariantColor } from "@/types/colors";
 
 export type ThemedButtonProps = PressableProps & {
   title: string;
-  color: ColorVariant;
+  color: VariantColor;
   loading?: boolean;
   disabled?: boolean;
 };
