@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-native";
 
+import { Spacing } from "@/constants/theme";
+
 import { ThemedView } from "./index";
 import { ThemedText } from "@/components/themed-text";
 
@@ -20,7 +22,7 @@ export const Surface: Story = {
         Surface background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };
 
@@ -32,7 +34,7 @@ export const SurfaceDim: Story = {
         Surface Dim background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };
 
@@ -44,7 +46,7 @@ export const SurfaceBright: Story = {
         Surface Bright background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };
 
@@ -56,7 +58,7 @@ export const Primary: Story = {
         Primary background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };
 
@@ -68,7 +70,7 @@ export const Secondary: Story = {
         Secondary background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };
 
@@ -80,7 +82,7 @@ export const Success: Story = {
         Success background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };
 
@@ -92,6 +94,6 @@ export const Warning: Story = {
         Warning background
       </ThemedText>
     ),
-    style: { padding: 16, borderRadius: 8 },
+    style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
 };

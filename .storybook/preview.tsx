@@ -1,12 +1,14 @@
 import type { Preview } from "@storybook/react-native";
 
+import { Colors } from "@/constants/theme";
+
 const preview: Preview = {
   parameters: {
     backgrounds: {
       default: "light",
       values: [
-        { name: "light", value: "#FEFDFB" },
-        { name: "dark", value: "#1E1E1E" },
+        { name: "light", value: Colors.light.surface },
+        { name: "dark", value: Colors.dark.surface },
       ],
     },
   },

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-native";
 
+import { Spacing, Sizes } from "@/constants/theme";
+
 import { ThemedButton } from "./index";
 import { ThemedView } from "@/components/themed-view";
 
@@ -8,7 +10,7 @@ const meta: Meta<typeof ThemedButton> = {
   component: ThemedButton,
   decorators: [
     (Story) => (
-      <ThemedView color="surface" style={{ padding: 16 }}>
+      <ThemedView color="surface" style={{ padding: Spacing.medium }}>
         <Story />
       </ThemedView>
     ),
@@ -65,7 +67,7 @@ export const Disabled: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <ThemedView color="surface" style={{ gap: 12 }}>
+    <ThemedView color="surface" style={{ gap: Sizes.extraSmall }}>
       <ThemedButton title="Primary" color="primary" />
       <ThemedButton title="Secondary" color="secondary" />
       <ThemedButton title="Success" color="success" />
@@ -76,7 +78,7 @@ export const AllVariants: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <ThemedView color="surface" style={{ gap: 12 }}>
+    <ThemedView color="surface" style={{ gap: Sizes.extraSmall }}>
       <ThemedButton title="Default" color="primary" />
       <ThemedButton title="Loading" color="primary" loading />
       <ThemedButton title="Disabled" color="primary" disabled />
