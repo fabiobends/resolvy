@@ -12,6 +12,8 @@ description: Generate a new shared component in src/components/ following Resolv
    - `constants.ts` — local magic values, config, enums (when needed)
    - `index.test.tsx` — unit tests with `@testing-library/react-native`
 
+- `stories.tsx` — Storybook stories (flat name, not `Something.stories.tsx`)
+
 2. Use theme tokens from `@/constants/theme`:
    - `Spacing` for padding, margin, gap, borderRadius
    - `Sizes` for width, height
@@ -37,6 +39,7 @@ src/components/<name>/
   styles.ts      — StyleSheet.create(...)
   constants.ts   — Local constants, enums, config
   index.test.tsx — Unit tests
+  stories.tsx    — Storybook stories
 ```
 
 ---

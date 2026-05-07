@@ -11,7 +11,7 @@ description: Generate a new module inside a feature following Resolvy convention
    - `types.ts` — `interface <Module>Props { ... }`
    - `styles.ts` — `StyleSheet.create({ ... })`
    - `constants.ts` — local magic values, config, enums (when needed)
-   - `use-module.test.ts` — unit tests for the hook
+   - `use-module.test.ts` — unit tests for the hook\n - `stories.tsx` — Storybook stories (flat name, not `Something.stories.tsx`)
    - `index.test.tsx` — unit tests for the component
 
 3. The hook:
@@ -35,14 +35,14 @@ description: Generate a new module inside a feature following Resolvy convention
 ## Naming conventions
 
 | Kind             | Convention           | Example              |
-| ---------------- | -------------------- | -------------------- |
+| ---------------- | -------------------- | -------------------- | --- | ------- | ------------- | ------------- |
 | Module file      | `index.tsx`          | `index.tsx`          |
 | Hook file        | `use-module.ts`      | `use-module.ts`      |
 | Style file       | `styles.ts`          | `styles.ts`          |
 | Type file        | `types.ts`           | `types.ts`           |
 | Constants file   | `constants.ts`       | `constants.ts`       |
 | Test file (UI)   | `index.test.tsx`     | `index.test.tsx`     |
-| Test file (hook) | `use-module.test.ts` | `use-module.test.ts` |
+| Test file (hook) | `use-module.test.ts` | `use-module.test.ts` | \n  | Stories | `stories.tsx` | `stories.tsx` |
 
 ---
 
