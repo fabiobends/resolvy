@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { Sizes, Spacing } from "@/constants/theme";
 
+/** Component styles. */
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",

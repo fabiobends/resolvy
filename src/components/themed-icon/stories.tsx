@@ -1,8 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-native";
+import { StyleSheet } from "react-native";
 
+import { Spacing } from "@/constants/theme";
 import { ThemedView } from "@/components/themed-view";
 
 import { ThemedIcon } from "./index";
+
+const styles = StyleSheet.create({
+  container: {
+    padding: Spacing.medium,
+  },
+});
 
 const meta: Meta<typeof ThemedIcon> = {
   title: "ThemedIcon",
@@ -20,7 +28,7 @@ export const PrimarySmall: Story = {
     size: "small",
   },
   render: (args) => (
-    <ThemedView color="surface" style={{ padding: 16 }}>
+    <ThemedView color="surface" style={styles.container}>
       <ThemedIcon {...args} />
     </ThemedView>
   ),
@@ -33,7 +41,7 @@ export const SecondaryMedium: Story = {
     size: "medium",
   },
   render: (args) => (
-    <ThemedView color="surface" style={{ padding: 16 }}>
+    <ThemedView color="surface" style={styles.container}>
       <ThemedIcon {...args} />
     </ThemedView>
   ),
@@ -46,7 +54,7 @@ export const SuccessLarge: Story = {
     size: "large",
   },
   render: (args) => (
-    <ThemedView color="surface" style={{ padding: 16 }}>
+    <ThemedView color="surface" style={styles.container}>
       <ThemedIcon {...args} />
     </ThemedView>
   ),
