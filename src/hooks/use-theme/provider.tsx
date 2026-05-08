@@ -14,10 +14,16 @@ function resolveActiveTheme(
   return system === "dark" ? "dark" : "light";
 }
 
+/** Props for the ThemeProvider component. */
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
+/**
+ * Provides theme state and handles persistence via AsyncStorage.
+ * @param props - Provider props.
+ * @returns React element.
+ */
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const systemScheme = useColorScheme();
   const [theme, setThemeState] = useState<ThemePreference>("system");
