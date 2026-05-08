@@ -1,0 +1,74 @@
+name: Manual EAS Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Action
+        required: true
+        type: choice
+        options:
+          - update
+          - build
+      profile:
+        description: Build profile (build only)
+        required: true
+        type: choice
+        options:
+          - development
+          - preview
+          - production
+        default: preview
+      platform:
+        description: Platform
+        required: true
+        type: choice
+        options:
+          - ios
+          - android
+          - all
+        default: all
+      branch:
+        description: Update branch (update only)
+        required: false
+        type: string
+        default: preview
+      autoSubmit:
+        description: Auto-submit to stores (production build only)
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: EAS Update
+        if: github.event.inputs.action == 'update'
+        run: eas update --branch ${{ github.event.inputs.branch }} --platform ${{ github.event.inputs.platform }} --non-interactive
+
+      - name: EAS Build
+        if: github.event.inputs.action == 'build'
+        run: |
+          if [ "${{ github.event.inputs.profile }}" = "production" ] && [ "${{ github.event.inputs.autoSubmit }}" = "true" ]; then
+            eas build --profile ${{ github.event.inputs.profile }} --platform ${{ github.event.inputs.platform }} --auto-submit --non-interactive
+          else
+            eas build --profile ${{ github.event.inputs.profile }} --platform ${{ github.event.inputs.platform }} --non-interactive
+          fi

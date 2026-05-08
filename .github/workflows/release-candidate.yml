@@ -1,0 +1,71 @@
+name: Release Candidate
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Restore last build deps
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .eas/last-build-deps.json
+          key: eas-prod-last-build-deps-${{ github.run_id }}
+          restore-keys: eas-prod-last-build-deps-
+
+      - name: Check dependency changes
+        id: deps
+        run: |
+          current=$(jq -S '.dependencies // {}' package.json)
+          if [ -f .eas/last-build-deps.json ]; then
+            old=$(cat .eas/last-build-deps.json)
+            if [ "$old" = "$current" ]; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: EAS Build & Submit
+        if: steps.deps.outputs.changed == 'true'
+        run: eas build --profile production --platform all --auto-submit --non-interactive
+
+      - name: EAS Update (Production)
+        if: steps.deps.outputs.changed == 'false'
+        run: eas update --branch production --message "${{ github.ref_name }}" --non-interactive
+
+      - name: Save current deps
+        if: steps.deps.outputs.changed == 'true'
+        run: |
+          mkdir -p .eas
+          jq -S '.dependencies // {}' package.json > .eas/last-build-deps.json
+
+      - name: Save cache
+        if: steps.deps.outputs.changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .eas/last-build-deps.json
+          key: eas-prod-last-build-deps-${{ github.run_id }}
