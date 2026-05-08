@@ -11,7 +11,7 @@ function resolveActiveTheme(
   system: "light" | "dark" | "unspecified" | null,
 ): "light" | "dark" {
   if (preference !== "system") return preference;
-  return system === "dark" ? "dark" : "light";
+  return system === "light" ? "light" : "dark";
 }
 
 /** Props for the ThemeProvider component. */
