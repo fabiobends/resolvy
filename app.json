@@ -29,7 +29,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "@react-native-async-storage/async-storage",
+      "@react-native-async-storage/expo-with-async-storage",
       "expo-router",
       [
         "expo-splash-screen",
