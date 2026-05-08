@@ -1,3 +1,4 @@
+import { createElement, ReactNode } from "react";
 import { renderHook } from "@testing-library/react-native";
 
 import { Colors } from "@/constants/theme";
@@ -12,9 +13,8 @@ function wrapper(theme: ThemeContextValue["activeTheme"]) {
     activeTheme: theme,
   };
 
-  const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  const Wrapper = ({ children }: { children: ReactNode }) =>
+    createElement(ThemeContext.Provider, { value }, children);
   Wrapper.displayName = "TestWrapper";
   return Wrapper;
 }
