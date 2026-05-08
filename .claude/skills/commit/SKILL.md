@@ -28,6 +28,7 @@ Invoke when user asks to commit changes.
    - OR bullet list: each bullet starts with capital letter, rest lowercase
    - Wrap lines at 72 characters
 8. Run `git commit -m "$(cat <<'EOF'\ntitle\n\nbody\nEOF\n)"` — do NOT use `--no-verify`
+9. Never add `Co-Authored-By`, `Signed-off-by`, or any AI/tool attribution lines to commits.
 
 ## Example — Single Commit
 
