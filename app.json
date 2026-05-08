@@ -9,7 +9,10 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.resolvy"
+      "bundleIdentifier": "com.resolvy",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.resolvy",
@@ -26,6 +29,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "@react-native-async-storage/async-storage",
       "expo-router",
       [
         "expo-splash-screen",
@@ -46,6 +50,12 @@
       "eas": {
         "projectId": "7b1d2181-cea6-4b06-a1dd-2892dc98529d"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/7b1d2181-cea6-4b06-a1dd-2892dc98529d"
     }
   }
 }
