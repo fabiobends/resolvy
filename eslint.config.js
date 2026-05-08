@@ -3,6 +3,7 @@ const { defineConfig } = require("eslint/config");
 const expoConfig = require("eslint-config-expo/flat");
 const tseslint = require("@typescript-eslint/eslint-plugin");
 const tsparser = require("@typescript-eslint/parser");
+const reactNative = require("eslint-plugin-react-native");
 
 module.exports = defineConfig([
   expoConfig,
@@ -20,6 +21,7 @@ module.exports = defineConfig([
     },
     plugins: {
       "@typescript-eslint": tseslint,
+      "react-native": reactNative,
     },
     settings: {
       "import/resolver": {
@@ -30,6 +32,7 @@ module.exports = defineConfig([
     },
     rules: {
       "@typescript-eslint/no-deprecated": "error",
+      "react-native/no-inline-styles": "error",
     },
   },
 ]);
