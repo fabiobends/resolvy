@@ -1,3 +1,4 @@
+import { createElement, ReactNode } from "react";
 import { renderHook } from "@testing-library/react-native";
 
 import { ThemeContext, ThemeContextValue } from "@/hooks/use-theme/context";
@@ -11,9 +12,8 @@ function wrapper(activeTheme: "light" | "dark") {
     activeTheme,
   };
 
-  const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  const Wrapper = ({ children }: { children: ReactNode }) =>
+    createElement(ThemeContext.Provider, { value }, children);
   Wrapper.displayName = "TestWrapper";
   return Wrapper;
 }
@@ -36,9 +36,8 @@ describe("useThemeSwitcherModule", () => {
       activeTheme: "dark",
     };
 
-    const CustomWrapper = ({ children }: { children: React.ReactNode }) => (
-      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-    );
+    const CustomWrapper = ({ children }: { children: ReactNode }) =>
+      createElement(ThemeContext.Provider, { value }, children);
 
     const { result } = renderHook(() => useThemeSwitcherModule(), {
       wrapper: CustomWrapper,

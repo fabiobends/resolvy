@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { FontSizes, LineHeights, Spacing } from "@/constants/theme";
 
+/** Component styles. */
 export const styles = StyleSheet.create({
   button: {
     alignItems: "center",

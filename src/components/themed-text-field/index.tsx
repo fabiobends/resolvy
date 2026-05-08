@@ -1,5 +1,6 @@
-import { Text, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 
+import { ThemedText } from "@/components/themed-text";
 import { useTheme } from "@/hooks/use-theme";
 
 import { styles } from "./styles";
@@ -16,7 +17,9 @@ export function ThemedTextField(props: ThemedTextFieldProps) {
 
   return (
     <View style={[styles.container, disabled && styles.disabled]}>
-      <Text style={[styles.label, { color: theme[color] }]}>{label}</Text>
+      <ThemedText type="label" themeColor={color} style={styles.label}>
+        {label}
+      </ThemedText>
       <TextInput
         editable={!disabled}
         placeholderTextColor={theme.onSurfaceDim}

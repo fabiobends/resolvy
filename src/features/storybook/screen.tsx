@@ -4,7 +4,7 @@ import {
   theme as lightTheme,
 } from "@storybook/react-native-theming";
 import { useMemo } from "react";
-import { View } from "react-native";
+import { ThemedView } from "@/components/themed-view";
 
 import { view } from "@/storybook/storybook.requires";
 import { useThemeContext } from "@/hooks/use-theme/context";
@@ -32,8 +32,8 @@ export function StorybookScreen() {
   const StorybookUIRoot = useMemo(() => createStorybookUI(isDark), [isDark]);
 
   return (
-    <View style={styles.container}>
+    <ThemedView color="surface" style={styles.container}>
       <StorybookUIRoot />
-    </View>
+    </ThemedView>
   );
 }

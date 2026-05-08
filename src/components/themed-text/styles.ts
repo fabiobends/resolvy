@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { FontSizes, LineHeights } from "@/constants/theme";
 
-/** Typography style presets for each text variant. */
+/** Component styles. */
 export const styles = StyleSheet.create({
   caption: {
     fontSize: FontSizes.tiny,
