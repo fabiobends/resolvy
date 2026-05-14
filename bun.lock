@@ -11,6 +11,7 @@
         "@react-navigation/native": "^7.1.33",
         "expo": "~55.0.17",
         "expo-constants": "~55.0.15",
+        "expo-dev-client": "^55.0.33",
         "expo-linking": "~55.0.14",
         "expo-router": "~55.0.13",
         "expo-splash-screen": "~55.0.19",
@@ -1105,6 +1106,14 @@
 
     "expo-constants": ["expo-constants@55.0.15", "", { "dependencies": { "@expo/env": "~2.1.1" }, "peerDependencies": { "expo": "*", "react-native": "*" } }, "sha512-w394fcZLJjeKN+9ZnJzL/HiarE1nwZFDa+3S9frevh6Ur+MAAs9QDrcXhDrV8T3xqRzzYaqsP6Z8TFZ4efWN1A=="],
 
+    "expo-dev-client": ["expo-dev-client@55.0.33", "", { "dependencies": { "expo-dev-launcher": "55.0.34", "expo-dev-menu": "55.0.28", "expo-dev-menu-interface": "55.0.2", "expo-manifests": "~55.0.17", "expo-updates-interface": "~55.1.6" }, "peerDependencies": { "expo": "*" } }, "sha512-tuwVlHEI1taWLtlNflkW6IX4OaY3fxgQQi+4sxIcn8UErBS1ip6EJuBmW/eBPBS67ZoKQhzLqg9W2a+WsJYfsg=="],
+
+    "expo-dev-launcher": ["expo-dev-launcher@55.0.34", "", { "dependencies": { "@expo/schema-utils": "^55.0.4", "expo-dev-menu": "55.0.28", "expo-manifests": "~55.0.17" }, "peerDependencies": { "expo": "*" } }, "sha512-xEVD5zIX2gMlxlRZfU0b6rzhBd1eeA/IpX1ut1UoPa7G0Gukc+7j240t6cm9sDvPCErmAP+x+Z142UeueXj+1Q=="],
+
+    "expo-dev-menu": ["expo-dev-menu@55.0.28", "", { "dependencies": { "expo-dev-menu-interface": "55.0.2" }, "peerDependencies": { "expo": "*" } }, "sha512-JsysTyPlsMuholX3e/QB6SQ9JlEfsFPy9KZCVItapCwyJQjFboISqM3mXiyP8CF2OIUudOwywxOrYU6ktAl8Vg=="],
+
+    "expo-dev-menu-interface": ["expo-dev-menu-interface@55.0.2", "", { "peerDependencies": { "expo": "*" } }, "sha512-DomUNvGzY/xliwnMdbAYY780sCv19N7zIbifc0ClcoCzJZpNSCkvJ2qGIFRPyM/7DmqmlHGCKi8di7kYYLKNEg=="],
+
     "expo-eas-client": ["expo-eas-client@55.0.5", "", {}, "sha512-wRagCeSbSnSGVXgP7V+qiGfXzZ9hTVKWvKIOP7lwrX3MIEenNmNlO4D3RVC3aNU2GhmO3ZCZIIEre80KZoUUHA=="],
 
     "expo-file-system": ["expo-file-system@55.0.17", "", { "peerDependencies": { "expo": "*", "react-native": "*" } }, "sha512-d27K1cagUOt2BwxwPka9KW8Znu5kN1tnairozCzzCRZviZFtWnBxwFuJ3KU6MAbav/9UhSMkp5Ve/oZ+SR0UgQ=="],
@@ -1121,7 +1130,7 @@
 
     "expo-linking": ["expo-linking@55.0.14", "", { "dependencies": { "expo-constants": "~55.0.15", "invariant": "^2.2.4" }, "peerDependencies": { "react": "*", "react-native": "*" } }, "sha512-ZSqOvJyEquf04M5/ZpQo2diK9QRnNrzgqZo7p8gzxaPPHxP6IyUJnmcd12qT+dTxnRTVmUpxFQVHHWbvwPNIwQ=="],
 
-    "expo-manifests": ["expo-manifests@55.0.16", "", { "dependencies": { "expo-json-utils": "~55.0.2" }, "peerDependencies": { "expo": "*" } }, "sha512-BR9BPcNsSnCKlQ/d7ECywr+2T54+bTSr26HjRjSua949o4mO/iPIrLjK0lOAa1oIczju6a6oUFckZD2OljxP0g=="],
+    "expo-manifests": ["expo-manifests@55.0.17", "", { "dependencies": { "expo-json-utils": "~55.0.2" }, "peerDependencies": { "expo": "*" } }, "sha512-vKZvFivX3usVJKfBODKQcFHso0g38zlGbRGqGAppz+il0zKvG6umpJ47OZbzLod7iJpjd+ZDD2AGuOxacixonA=="],
 
     "expo-modules-autolinking": ["expo-modules-autolinking@55.0.18", "", { "dependencies": { "@expo/require-utils": "^55.0.4", "@expo/spawn-async": "^1.7.2", "chalk": "^4.1.0", "commander": "^7.2.0" }, "bin": { "expo-modules-autolinking": "bin/expo-modules-autolinking.js" } }, "sha512-olGTCWYkwVPj/momcgnF+z8MTzurGNFjopqPztQ4F53UkGPJnOFEuaM2/z4KbZtKbwHqeBv34OA5hxZP8uLdaQ=="],
 
@@ -2365,7 +2374,11 @@
 
     "expo/pretty-format": ["pretty-format@29.7.0", "", { "dependencies": { "@jest/schemas": "^29.6.3", "ansi-styles": "^5.0.0", "react-is": "^18.0.0" } }, "sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ=="],
 
+    "expo-dev-launcher/@expo/schema-utils": ["@expo/schema-utils@55.0.4", "", {}, "sha512-65IdeeE8dAZR3n3J5Eq7LYiQ8BFGeEYCWPBCzycvafL7PkskbCyIclTQarRwf/HXFoRvezKCjaLwy/8v9Prk6g=="],
+
     "expo-modules-autolinking/commander": ["commander@7.2.0", "", {}, "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="],
+
+    "expo-updates/expo-manifests": ["expo-manifests@55.0.16", "", { "dependencies": { "expo-json-utils": "~55.0.2" }, "peerDependencies": { "expo": "*" } }, "sha512-BR9BPcNsSnCKlQ/d7ECywr+2T54+bTSr26HjRjSua949o4mO/iPIrLjK0lOAa1oIczju6a6oUFckZD2OljxP0g=="],
 
     "fbjs/promise": ["promise@7.3.1", "", { "dependencies": { "asap": "~2.0.3" } }, "sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg=="],
 
