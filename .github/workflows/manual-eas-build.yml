@@ -1,17 +1,10 @@
-name: Manual EAS Pipeline
+name: Manual EAS Build
 
 on:
   workflow_dispatch:
     inputs:
-      action:
-        description: Action
-        required: true
-        type: choice
-        options:
-          - update
-          - build
       profile:
-        description: Build profile (build only)
+        description: Profile
         required: true
         type: choice
         options:
@@ -28,19 +21,14 @@ on:
           - android
           - all
         default: all
-      branch:
-        description: Update branch (update only)
-        required: false
-        type: string
-        default: preview
       autoSubmit:
-        description: Auto-submit to stores (production build only)
+        description: Auto-submit to stores (production only)
         required: false
         type: boolean
         default: false
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -60,12 +48,7 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: EAS Update
-        if: github.event.inputs.action == 'update'
-        run: eas update --branch ${{ github.event.inputs.branch }} --platform ${{ github.event.inputs.platform }} --non-interactive
-
       - name: EAS Build
-        if: github.event.inputs.action == 'build'
         run: |
           if [ "${{ github.event.inputs.profile }}" = "production" ] && [ "${{ github.event.inputs.autoSubmit }}" = "true" ]; then
             eas build --profile ${{ github.event.inputs.profile }} --platform ${{ github.event.inputs.platform }} --auto-submit --non-interactive
