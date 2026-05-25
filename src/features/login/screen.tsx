@@ -1,12 +1,7 @@
-import {
-  KeyboardAwareScrollView,
-  KeyboardToolbar,
-} from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ThemedView } from "@/components/themed-view";
-import { Spacing } from "@/constants/theme";
-
+import { KeyboardScrollView } from "@/components/keyboard-scroll-view";
+import { KeyboardToolbarView } from "@/components/keyboard-toolbar-view";
 import { FormModule } from "./modules/form";
 import { LogoModule } from "./modules/logo";
 import { SocialModule } from "./modules/social";
@@ -25,23 +20,16 @@ export function LoginScreenView({
   socialProps,
 }: LoginScreenProps) {
   return (
-    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
-      <ThemedView themeColor="surface" style={styles.container}>
-        <KeyboardAwareScrollView
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
-          bottomOffset={Spacing.large}
-        >
-          <LogoModule {...logoProps} />
-          <FormModule {...formProps} />
-          <SocialModule {...socialProps} />
-        </KeyboardAwareScrollView>
-      </ThemedView>
-      <KeyboardToolbar>
-        <KeyboardToolbar.Prev />
-        <KeyboardToolbar.Next />
-        <KeyboardToolbar.Done onPress={formProps.submitButton.onPress} />
-      </KeyboardToolbar>
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardScrollView
+        contentContainerStyle={styles.scrollContent}
+        themeColor="surface"
+      >
+        <LogoModule {...logoProps} />
+        <FormModule {...formProps} />
+        <SocialModule {...socialProps} />
+      </KeyboardScrollView>
+      <KeyboardToolbarView onDonePress={formProps.submitButton.onPress} />
     </SafeAreaView>
   );
 }

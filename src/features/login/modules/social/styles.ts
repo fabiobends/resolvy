@@ -11,11 +11,7 @@ export const styles = StyleSheet.create({
   dividerRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: Spacing.small,
-  },
-  line: {
-    flex: 1,
-    height: 1,
+    justifyContent: "center",
   },
   buttonsRow: {
     flexDirection: "row",
