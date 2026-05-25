@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import type { Meta, StoryObj } from "@storybook/react-native";
 
 import { Spacing } from "@/constants/theme";
@@ -5,12 +6,21 @@ import { Spacing } from "@/constants/theme";
 import { ThemedText } from "./index";
 import { ThemedView } from "@/components/themed-view";
 
+const styles = StyleSheet.create({
+  decoratorPadding: {
+    padding: Spacing.medium,
+  },
+  gap: {
+    gap: Spacing.small,
+  },
+});
+
 const meta: Meta<typeof ThemedText> = {
   title: "ThemedText",
   component: ThemedText,
   decorators: [
     (Story) => (
-      <ThemedView color="surface" style={{ padding: Spacing.medium }}>
+      <ThemedView themeColor="surface" style={styles.decoratorPadding}>
         <Story />
       </ThemedView>
     ),
@@ -79,7 +89,7 @@ export const Caption: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <ThemedView color="surface" style={{ gap: Spacing.small }}>
+    <ThemedView themeColor="surface" style={styles.gap}>
       <ThemedText type="display" themeColor="primary">
         Display
       </ThemedText>
