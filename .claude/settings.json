@@ -16,17 +16,6 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "agent",
-            "prompt": "Use agents/code-shaper.md to check code shape and style.",
-            "statusMessage": "Running code shaper agent"
-          }
-        ]
-      }
     ]
   }
 }
