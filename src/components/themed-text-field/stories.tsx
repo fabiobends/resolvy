@@ -61,6 +61,15 @@ export const Warning: Story = {
   },
 };
 
+export const PasswordToggle: Story = {
+  args: {
+    label: "Password",
+    variantColor: "primary",
+    placeholder: "Enter password",
+    secureTextEntry: true,
+  },
+};
+
 export const Disabled: Story = {
   args: {
     label: "Read Only",

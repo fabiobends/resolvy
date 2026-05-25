@@ -1,7 +1,8 @@
-import { forwardRef } from "react";
-import { TextInput } from "react-native";
+import { forwardRef, useState } from "react";
+import { Pressable, TextInput } from "react-native";
 
 import { ThemedView } from "@/components/themed-view";
+import { ThemedIcon } from "@/components/themed-icon";
 
 import { ThemedText } from "@/components/themed-text";
 import { useTheme } from "@/hooks/use-theme";
@@ -25,31 +26,50 @@ export const ThemedTextField = forwardRef<TextInput, ThemedTextFieldProps>(
       disabled,
       errorText,
       helperText,
+      secureTextEntry,
       style,
       ...rest
     } = props;
     const theme = useTheme();
     const hasError = !!errorText;
+    const [isSecure, setIsSecure] = useState(secureTextEntry ?? false);
+    const showToggle = secureTextEntry != null;
 
     return (
       <ThemedView style={[styles.container, disabled && styles.disabled]}>
         <ThemedText type="label" themeColor={hasError ? "error" : variantColor}>
           {label}
         </ThemedText>
-        <TextInput
-          ref={ref}
-          editable={!disabled}
-          placeholderTextColor={theme.onSurfaceDim}
-          style={[
-            styles.input,
-            {
-              color: theme.onSurface,
-              borderColor: hasError ? theme.error : theme[variantColor],
-            },
-            style,
-          ]}
-          {...rest}
-        />
+        <ThemedView style={styles.inputWrapper}>
+          <TextInput
+            ref={ref}
+            editable={!disabled}
+            placeholderTextColor={theme.onSurfaceDim}
+            secureTextEntry={isSecure}
+            style={[
+              styles.input,
+              showToggle && styles.inputWithIcon,
+              {
+                color: theme.onSurface,
+                borderColor: hasError ? theme.error : theme[variantColor],
+              },
+              style,
+            ]}
+            {...rest}
+          />
+          {showToggle && (
+            <Pressable
+              onPress={() => setIsSecure((prev) => !prev)}
+              style={styles.icon}
+            >
+              <ThemedIcon
+                name={isSecure ? "eye-off-outline" : "eye-outline"}
+                themeColor="onSurfaceDim"
+                size="small"
+              />
+            </Pressable>
+          )}
+        </ThemedView>
         <ThemedText
           type="label"
           themeColor={hasError ? "error" : "onSurfaceDim"}
