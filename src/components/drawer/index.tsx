@@ -60,6 +60,7 @@ export function Drawer({ visible, onClose, title, children }: DrawerProps) {
           { backgroundColor: theme.overlay },
           backdropStyle,
         ]}
+        pointerEvents={visible ? "auto" : "none"}
       >
         <Pressable
           accessibilityRole="button"
@@ -89,7 +90,7 @@ export function Drawer({ visible, onClose, title, children }: DrawerProps) {
             onPress={onClose}
             style={styles.closeButton}
           >
-            <ThemedIcon name="close" color="primary" size="medium" />
+            <ThemedIcon name="close" themeColor="primary" size="medium" />
           </Pressable>
         </Animated.View>
 
