@@ -15,7 +15,7 @@ export function HomeScreen() {
   const { themeSwitcherProps, welcomeProps } = useHomeScreen();
 
   return (
-    <ThemedView color="surface" style={styles.container}>
+    <ThemedView themeColor="surface" style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <Welcome {...welcomeProps} />
         <ThemeSwitcher {...themeSwitcherProps} />

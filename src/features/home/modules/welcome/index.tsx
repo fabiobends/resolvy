@@ -13,7 +13,7 @@ export function Welcome(props: WelcomeProps) {
   const { title, subtitle } = props;
 
   return (
-    <ThemedView color="surfaceDim" style={styles.card}>
+    <ThemedView themeColor="surfaceDim" style={styles.card}>
       <ThemedText type="title" themeColor="onSurface" style={styles.title}>
         {title}
       </ThemedText>
