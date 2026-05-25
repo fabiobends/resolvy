@@ -23,7 +23,7 @@ describe("ThemedIcon", () => {
     render(
       <ThemedIcon
         name="sunny-outline"
-        color="primary"
+        themeColor="primary"
         size="medium"
         testID="icon"
       />,

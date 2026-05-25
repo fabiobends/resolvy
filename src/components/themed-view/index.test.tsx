@@ -5,7 +5,7 @@ import { ThemedView } from "./index";
 describe("ThemedView", () => {
   it("renders children correctly", () => {
     const { getByTestId } = render(
-      <ThemedView color="surface" testID="themed-view">
+      <ThemedView themeColor="surface" testID="themed-view">
         <></>
       </ThemedView>,
     );

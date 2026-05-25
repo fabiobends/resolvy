@@ -16,7 +16,7 @@ type Story = StoryObj<typeof ThemedView>;
 
 export const Surface: Story = {
   args: {
-    color: "surface",
+    themeColor: "surface",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
@@ -30,7 +30,7 @@ export const Surface: Story = {
 
 export const SurfaceDim: Story = {
   args: {
-    color: "surfaceDim",
+    themeColor: "surfaceDim",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
@@ -44,7 +44,7 @@ export const SurfaceDim: Story = {
 
 export const SurfaceBright: Story = {
   args: {
-    color: "surfaceBright",
+    themeColor: "surfaceBright",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
@@ -58,7 +58,7 @@ export const SurfaceBright: Story = {
 
 export const Primary: Story = {
   args: {
-    color: "primary",
+    themeColor: "primary",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
@@ -72,7 +72,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    color: "secondary",
+    themeColor: "secondary",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
@@ -86,7 +86,7 @@ export const Secondary: Story = {
 
 export const Success: Story = {
   args: {
-    color: "success",
+    themeColor: "success",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
@@ -100,7 +100,7 @@ export const Success: Story = {
 
 export const Warning: Story = {
   args: {
-    color: "warning",
+    themeColor: "warning",
     style: { padding: Spacing.medium, borderRadius: Spacing.small },
   },
   render: (args) => (
