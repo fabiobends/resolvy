@@ -12,13 +12,10 @@ export function SocialModule(props: SocialModuleProps) {
   return (
     <ThemedView style={styles.container}>
       <ThemedView style={styles.dividerRow}>
-        <ThemedView themeColor="onSurfaceDim" style={styles.line} />
         <ThemedText type="bodySmall" themeColor="onSurfaceDim">
           or continue with
         </ThemedText>
-        <ThemedView themeColor="onSurfaceDim" style={styles.line} />
       </ThemedView>
-
       <ThemedView style={styles.buttonsRow}>
         <ThemedIconButton
           name="logo-google"

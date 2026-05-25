@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 
-import { useLoginMutation } from "../../hooks/use-login-mutation";
+import { useLoginMutation } from "./use-login-mutation";
 import { LoginFormData } from "../../schema";
 import { FormModuleProps } from "./types";
 
