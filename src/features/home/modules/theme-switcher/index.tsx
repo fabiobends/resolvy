@@ -18,7 +18,7 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
   const theme = useTheme();
 
   return (
-    <ThemedView color="surfaceDim" style={styles.container}>
+    <ThemedView themeColor="surfaceDim" style={styles.container}>
       <ThemedText type="body" themeColor="onSurface">
         Theme: {activeTheme}
       </ThemedText>
@@ -30,7 +30,7 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
       >
         <ThemedIcon
           name={activeTheme === "dark" ? "sunny-outline" : "moon-outline"}
-          color="onPrimary"
+          themeColor="onPrimary"
           size="medium"
           testID="theme-icon"
         />
