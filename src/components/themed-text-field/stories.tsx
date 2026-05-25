@@ -1,16 +1,23 @@
+import { StyleSheet } from "react-native";
 import type { Meta, StoryObj } from "@storybook/react-native";
 
 import { Spacing } from "@/constants/theme";
 
-import { ThemedTextField } from "./index";
 import { ThemedView } from "@/components/themed-view";
+import { ThemedTextField } from "./index";
+
+const styles = StyleSheet.create({
+  decoratorPadding: {
+    padding: Spacing.medium,
+  },
+});
 
 const meta: Meta<typeof ThemedTextField> = {
   title: "ThemedTextField",
   component: ThemedTextField,
   decorators: [
     (Story) => (
-      <ThemedView color="surface" style={{ padding: Spacing.medium }}>
+      <ThemedView themeColor="surface" style={styles.decoratorPadding}>
         <Story />
       </ThemedView>
     ),
@@ -24,7 +31,7 @@ type Story = StoryObj<typeof ThemedTextField>;
 export const Primary: Story = {
   args: {
     label: "Email Address",
-    color: "primary",
+    variantColor: "primary",
     placeholder: "Enter your email",
   },
 };
@@ -32,7 +39,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     label: "Username",
-    color: "secondary",
+    variantColor: "secondary",
     placeholder: "Enter username",
   },
 };
@@ -40,7 +47,7 @@ export const Secondary: Story = {
 export const Success: Story = {
   args: {
     label: "Verification Code",
-    color: "success",
+    variantColor: "success",
     placeholder: "123456",
   },
 };
@@ -48,7 +55,7 @@ export const Success: Story = {
 export const Warning: Story = {
   args: {
     label: "Password",
-    color: "warning",
+    variantColor: "warning",
     placeholder: "Minimum 8 characters",
     secureTextEntry: true,
   },
@@ -57,7 +64,7 @@ export const Warning: Story = {
 export const Disabled: Story = {
   args: {
     label: "Read Only",
-    color: "primary",
+    variantColor: "primary",
     placeholder: "Cannot edit",
     disabled: true,
   },
@@ -66,7 +73,35 @@ export const Disabled: Story = {
 export const WithValue: Story = {
   args: {
     label: "Full Name",
-    color: "primary",
+    variantColor: "primary",
     value: "Jane Doe",
+  },
+};
+
+export const WithHelperText: Story = {
+  args: {
+    label: "Email",
+    variantColor: "primary",
+    placeholder: "Enter email",
+    helperText: "We will never share your email.",
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    label: "Email",
+    variantColor: "primary",
+    placeholder: "Enter email",
+    errorText: "Invalid email address",
+  },
+};
+
+export const ErrorOverridesHelperText: Story = {
+  args: {
+    label: "Email",
+    variantColor: "primary",
+    placeholder: "Enter email",
+    helperText: "We will never share your email.",
+    errorText: "Invalid email address",
   },
 };
