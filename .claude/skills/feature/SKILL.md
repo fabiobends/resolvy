@@ -55,7 +55,8 @@ description: Generate a new feature/screen following the Resolvy composition pat
    - `use-module.ts` — hook with business logic
    - `types.ts` — prop interfaces
    - `styles.ts` — StyleSheet
-   - `use-module.test.ts` — unit test for hook\n - `stories.tsx` — Storybook stories (flat name, not `Something.stories.tsx`)
+   - `use-module.test.ts` — unit test for hook
+   - `stories.tsx` — Storybook stories (flat name, not `Something.stories.tsx`)
    - `index.test.tsx` — unit test for UI
 
 7. Use `FontSizes` / `LineHeights` for text dimensions, `Spacing` for padding/margin/borderRadius/gap, `Sizes` for width/height, and resolved colors from `useTheme()`. Use `<ThemedText type="..." themeColor="...">` for all text — never apply `fontSize` or `fontWeight` via `style`.
@@ -84,7 +85,8 @@ src/features/<name>/
       styles.ts
       constants.ts
       index.test.tsx
-      use-module.test.ts\n      stories.tsx
+      use-module.test.ts
+      stories.tsx
 
 src/app/
   <route>.tsx   — thin route entry point
