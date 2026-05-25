@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan — Feature Name</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #111827;
+      --surface-2: #1f2937;
+      --text: #f3f4f6;
+      --text-dim: #9ca3af;
+      --accent: #6366f1;
+      --accent-2: #8b5cf6;
+      --success: #22c55e;
+      --warning: #eab308;
+      --danger: #ef4444;
+      --radius: 16px;
+      --shadow: 0 12px 36px rgba(0,0,0,0.4);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding: 28px;
+    }
+    .container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+
+    header {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute; top: -50px; right: -50px;
+      width: 180px; height: 180px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 50%;
+    }
+    h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.6px; }
+    .subtitle { color: rgba(255,255,255,0.88); margin-top: 6px; font-size: 15px; }
+    .progress-wrap { display: flex; align-items: center; gap: 16px; margin-top: 22px; }
+    .ring {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: conic-gradient(var(--success) calc(var(--pct) * 1%), rgba(255,255,255,0.12) 0);
+      display: grid; place-items: center;
+      font-size: 13px; font-weight: 700;
+    }
+    .ring span { color: #fff; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+    .card h2 {
+      font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--text-dim); margin-bottom: 14px;
+    }
+    .summary { font-size: 15px; color: var(--text-dim); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--surface-2);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .info-card h3 {
+      font-size: 14px; font-weight: 700; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .info-card p, .info-card li {
+      font-size: 14px; color: var(--text-dim); line-height: 1.6;
+    }
+    .info-card ul { padding-left: 18px; }
+
+    .board { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .column {
+      background: var(--surface-2);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .column-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .column-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: grid; place-items: center; font-size: 14px;
+    }
+    .column-title { font-size: 13px; font-weight: 700; }
+    .column-count {
+      margin-left: auto;
+      font-size: 11px; font-weight: 700; color: var(--text-dim);
+      background: rgba(255,255,255,0.06);
+      padding: 3px 8px; border-radius: 20px;
+    }
+
+    .task {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px;
+      background: var(--surface);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform .15s, border-color .15s;
+    }
+    .task:last-child { margin-bottom: 0; }
+    .task:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.10); }
+    .status {
+      width: 14px; height: 14px; border-radius: 50%;
+      margin-top: 2px; flex-shrink: 0;
+    }
+    .status.done { background: var(--success); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+    .status.todo { background: rgba(255,255,255,0.12); }
+    .status.wip { background: var(--warning); box-shadow: 0 0 8px rgba(234,179,8,0.4); }
+    .task-body { display: flex; flex-direction: column; gap: 4px; }
+    .task-title { font-weight: 600; }
+    .task-meta { font-size: 11px; color: var(--text-dim); }
+    .badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .5px;
+      padding: 2px 7px; border-radius: 6px; margin-left: 6px;
+    }
+    .badge.done { background: rgba(34,197,94,0.15); color: var(--success); }
+    .badge.todo { background: rgba(255,255,255,0.06); color: var(--text-dim); }
+    .badge.wip { background: rgba(234,179,8,0.15); color: var(--warning); }
+
+    /* Test Coverage — What & How */
+    .test-tier { margin-bottom: 18px; }
+    .test-tier:last-child { margin-bottom: 0; }
+    .test-tier h3 {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-dim); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .test-dot {
+      width: 10px; height: 10px; border-radius: 3px; display: inline-block;
+    }
+    .test-dot.unit { background: var(--success); }
+    .test-dot.int { background: var(--accent); }
+    .test-dot.e2e { background: var(--accent-2); }
+
+    .test-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .test-table thead {
+      background: rgba(255,255,255,0.04);
+    }
+    .test-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--text-dim);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .test-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .test-table tbody tr:last-child { border-bottom: none; }
+    .test-table td {
+      padding: 12px 14px;
+      color: var(--text-dim);
+      vertical-align: top;
+    }
+    .test-table td:first-child {
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .risks { display: flex; flex-direction: column; gap: 10px; }
+    .risk { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; font-size: 13px; }
+    .risk.warn { background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.25); color: #facc15; }
+    .risk.crit { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
+
+    footer { text-align: center; font-size: 12px; color: var(--text-dim); padding: 10px 0; }
+
+    .skills-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.25);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Feature Name</h1>
+      <p class="subtitle">One-line summary of what this feature does.</p>
+      <div class="progress-wrap">
+        <div class="ring" style="--pct:0;"><span>0%</span></div>
+        <div>
+          <div style="font-size:13px; font-weight:600;">0 of 0 tasks done</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.65); margin-top:2px;">Last updated: now</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2>What this feature is</h2>
+      <p class="summary">
+        Plain-language explanation of the feature for anyone who does not read code.
+        What problem it solves, who benefits, and how it works at a high level.
+        Imagine explaining it to a stakeholder in one paragraph.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Entry &amp; Exit</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Land</h3>
+          <p>How user reaches this screen. Route, deep link, or prior screen.</p>
+        </div>
+        <div class="info-card">
+          <h3>Exit — success</h3>
+          <p>Where user goes after completing the flow.</p>
+        </div>
+        <div class="info-card">
+          <h3>Exit — cancel / back</h3>
+          <p>Where user goes if they abort or hit back.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Why it matters</h3>
+        <p>Short reason this feature is needed. Business or user value in one or two sentences.</p>
+      </div>
+      <div class="info-card">
+        <h3>Key decisions</h3>
+        <ul>
+          <li>Decision 1 — rationale</li>
+          <li>Decision 2 — rationale</li>
+          <li>Decision 3 — rationale</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Skills</h3>
+        <p style="margin-bottom:6px">Which skills to load when executing the plan.</p>
+        <span class="skills-tag">feature</span>
+        <span class="skills-tag">form</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Task Board</h2>
+      <div class="board">
+        <div class="column">
+          <div class="column-header">
+            <div class="column-icon" style="background:rgba(99,102,241,0.15);"><span></span></div>
+            <div class="column-title">Setup</div>
+            <div class="column-count">0/2</div>
+          </div>
+          <div class="task">
+            <div class="status todo"></div>
+            <div class="task-body">
+              <div class="task-title">Create schema<span class="badge todo">Todo</span></div>
+              <div class="task-meta">Types, validation rules</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-icon" style="background:rgba(139,92,246,0.15);"><span></span></div>
+            <div class="column-title">Core</div>
+            <div class="column-count">0/2</div>
+          </div>
+          <div class="task">
+            <div class="status todo"></div>
+            <div class="task-body">
+              <div class="task-title">Build form<span class="badge todo">Todo</span></div>
+              <div class="task-meta">UI, validation, submit</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-icon" style="background:rgba(234,179,8,0.15);"><span></span></div>
+            <div class="column-title">Polish</div>
+            <div class="column-count">0/2</div>
+          </div>
+          <div class="task">
+            <div class="status todo"></div>
+            <div class="task-body">
+              <div class="task-title">Error states<span class="badge todo">Todo</span></div>
+              <div class="task-meta">Loading, empty, error UI</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-icon" style="background:rgba(34,197,94,0.15);"><span></span></div>
+            <div class="column-title">Tests</div>
+            <div class="column-count">0/3</div>
+          </div>
+          <div class="task">
+            <div class="status todo"></div>
+            <div class="task-body">
+              <div class="task-title">Unit tests<span class="badge todo">Todo</span></div>
+              <div class="task-meta">What &amp; How to Test</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-icon" style="background:rgba(236,72,153,0.15);"><span></span></div>
+            <div class="column-title">Storybook</div>
+            <div class="column-count">0/2</div>
+          </div>
+          <div class="task">
+            <div class="status todo"></div>
+            <div class="task-body">
+              <div class="task-title">Add stories<span class="badge todo">Todo</span></div>
+              <div class="task-meta">Empty, filled, error states</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Test Coverage — What &amp; How to Test</h2>
+
+      <div class="test-tier">
+        <h3><span class="test-dot unit"></span> Unit Tests</h3>
+        <table class="test-table">
+          <thead>
+            <tr><th>Under test</th><th>What it validates</th><th>How it approaches it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>useFeature</code></td>
+              <td>Returns data on success; handles error states</td>
+              <td>Mocks API response; asserts state updates</td>
+            </tr>
+            <tr>
+              <td>Zod schema</td>
+              <td>Valid input passes; invalid fails with clear message</td>
+              <td>Feeds edge-case inputs; checks error shape</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="test-tier">
+        <h3><span class="test-dot int"></span> Integration Tests</h3>
+        <table class="test-table">
+          <thead>
+            <tr><th>Flow</th><th>What it validates</th><th>How it approaches it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Submit form</td>
+              <td>Success navigates; network error shows retry UI</td>
+              <td>Renders full module; mocks API; asserts navigation + error banner</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="test-tier">
+        <h3><span class="test-dot e2e"></span> E2E Tests</h3>
+        <table class="test-table">
+          <thead>
+            <tr><th>Flow</th><th>What it validates</th><th>How it approaches it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>User completes checkout</td>
+              <td>Payment succeeds end-to-end</td>
+              <td>Drives real navigation stack; checks screen transitions</td>
+            </tr>
+            <tr>
+              <td>User completes checkout</td>
+              <td>Card declined shows inline error</td>
+              <td>Mocks payment provider; asserts error message visibility</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Risks & Blockers</h2>
+      <div class="risks">
+        <div class="risk warn">Open question: do we need offline support?</div>
+      </div>
+    </div>
+
+    <footer></footer>
+  </div>
+</body>
+</html>

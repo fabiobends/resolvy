@@ -44,4 +44,5 @@ app-example
 
 ## Claude
 .claude/worktrees/
+.claude/plans/
 
