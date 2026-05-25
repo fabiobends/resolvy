@@ -166,3 +166,15 @@ describe("useHeaderModule", () => {
   });
 });
 ```
+
+---
+
+## Tips
+
+- Keep modules **self-contained**. If a hook or helper is only consumed by this module, keep it inside the module folder.
+- If something is used by **more than one module within the same feature**, extract it to a shared hook at `src/hooks/use-shared.ts` that exposes `UseSharedProps`. Modules that consume only a subset should accept `Partial<UseSharedProps>` as a prop.
+- Use **composition** over deep nesting. Pass plain objects (props) rather than rendering children inside the hook.
+- Avoid adding `children` to module props unless the module is a layout wrapper.
+- Keep modules **focused on a single visual section** of the screen.
+- **Do not** put navigation or routing logic inside modules. Modules are presentational.
+- For cross-cutting concerns (e.g., theme, auth), use shared hooks in `src/hooks/` and compose them in the screen hook.
