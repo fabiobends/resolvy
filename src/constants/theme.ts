@@ -21,12 +21,46 @@ export const themeColorKeys = [
 
 export type ThemeColor = (typeof themeColorKeys)[number];
 
+/** Semantic action variants used for interactive components. */
+export type VariantColor =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "error";
+
+/** Ordered list of variant color keys for controls and iteration. */
+export const variantColorKeys: VariantColor[] = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "error",
+];
+
+/** Contrast colors for content placed on variant-colored surfaces. */
+export type OnVariantColor =
+  | "onPrimary"
+  | "onSecondary"
+  | "onSuccess"
+  | "onWarning"
+  | "onError";
+
+/** Maps each variantColor to its corresponding foreground themeColor. */
+export const onColorMap: Record<VariantColor, ThemeColor> = {
+  primary: "onPrimary",
+  secondary: "onSecondary",
+  success: "onSuccess",
+  warning: "onWarning",
+  error: "onError",
+};
+
 const lightColors = {
   primary: "#4F46E5",
   onPrimary: "#FAFAFA",
   secondary: "#D97706",
   onSecondary: "#1C1C1A",
-  surface: "#FEFDFB",
+  surface: "#F5F5F0",
   onSurface: "#1C1C1A",
   success: "#16A34A",
   onSuccess: "#FAFAFA",
@@ -34,10 +68,10 @@ const lightColors = {
   onWarning: "#1C1C1A",
   error: "#DC2626",
   onError: "#FAFAFA",
-  surfaceBright: "#FFFEFD",
+  surfaceBright: "#FFFFFF",
   onSurfaceBright: "#1C1C1A",
-  surfaceDim: "#E8E6E1",
-  onSurfaceDim: "#3D3D3A",
+  surfaceDim: "#E0DDD6",
+  onSurfaceDim: "#4A4A45",
   overlay: "rgba(28, 28, 26, 0.4)",
 } as const satisfies Record<ThemeColor, string>;
 
@@ -54,9 +88,9 @@ const darkColors = {
   onWarning: "#422006",
   error: "#F87171",
   onError: "#450A0A",
-  surfaceBright: "#2C2C2C",
+  surfaceBright: "#2D2D2D",
   onSurfaceBright: "#E5E5E5",
-  surfaceDim: "#141414",
+  surfaceDim: "#121212",
   onSurfaceDim: "#A1A1A1",
   overlay: "rgba(0, 0, 0, 0.5)",
 } as const satisfies Record<ThemeColor, string>;
