@@ -1,12 +1,12 @@
 # Code Guidelines
 
-These conventions keep the codebase consistent and maintainable.
+Conventions for consistent, maintainable code.
 
 ---
 
 ## Folder Architecture
 
-### Shared pieces (`src/`)
+### Shared (`src/`)
 
 ```
 src/
@@ -14,9 +14,9 @@ src/
   /constants    /types   /features
 ```
 
-### Individual piece (component, hook, feature, etc.)
+### Individual piece (component, hook, feature)
 
-Every piece with enough surface area lives in its own folder:
+Each piece with significant surface area gets its own folder:
 
 ```
 /piece
@@ -34,8 +34,8 @@ Every piece with enough surface area lives in its own folder:
 
 Examples in the codebase:
 
-- `src/components/themed-text/index.tsx`, `styles.ts`, `types.ts`, `themed-text.test.tsx`
-- `src/hooks/use-theme/index.ts`, `use-theme.test.ts`
+- `src/components/themed-text/` — `index.tsx`, `styles.ts`, `types.ts`, `index.test.tsx`
+- `src/hooks/use-theme/` — `index.ts`, `index.test.ts`
 
 > Never group unrelated components as flat files in `src/components/`.
 
@@ -48,34 +48,34 @@ Examples in the codebase:
 
 ## Comments
 
-- Explain **why**, not what — code shows what, comments show why.
-- **TSDoc** is required on all exported functions, classes, and constants:
-  - One-line summary at the top.
-  - For functions: add `@param` for every parameter and `@returns` for the return value.
-  - For constants: a one-line summary is enough; include `@example` if the shape is not obvious.
-- Remove all other comments unless they explain non-obvious business logic.
+- Explain **why**, not what.
+- **TSDoc** on all exported functions, classes, constants:
+  - One-line summary.
+  - Functions: `@param` for each parameter, `@returns` for return value.
+  - Constants: one-line summary; add `@example` if shape is non-obvious.
+- Remove all other comments unless explaining non-obvious business logic.
 
 ---
 
 ## Imports
 
-- **No barrel files.** Import directly from the source file.
-- Use **path aliases** (`@/components/...`, `@/constants/...`) for cross-folder imports.
-- Use **relative paths** (`./`, `../`) when importing from the same or adjacent folder.
+- No barrel files — import directly from source.
+- Path aliases (`@/`) for cross-folder imports.
+- Relative paths (`./`, `../`) for same or adjacent folders.
 
 ---
 
 ## Configuration
 
-- No hardcoded URLs, API keys, or environment-specific values.
-- Use environment variables or dedicated config files instead.
+- No hardcoded URLs, API keys, or environment values.
+- Use environment variables or config files.
 
 ---
 
 ## Cleanup
 
-- Remove unused imports, exports, components, and dependencies.
-- Prefer Themed components (`@/components/themed-*.tsx`) over plain React Native primitives.
+- Remove unused imports, exports, components, dependencies.
+- Prefer themed components (`@/components/themed-*.tsx`) over React Native primitives.
 
 ---
 
@@ -91,14 +91,14 @@ Examples in the codebase:
   const x = a || "default";
   ```
 
-- Put tests **next to the code**, not in `__tests__` folders.
-- Use a **jest setup file** (`jest.setup.ts`) for global mocks instead of `__mocks__` directories.
+- Tests next to code — not in `__tests__` folders.
+- Use `jest.setup.ts` for global mocks — not `__mocks__` directories.
 
 ---
 
 ## Testing
 
-- Every exported function, class, and non-trivial logic branch must have unit tests.
-- **Dev-tool only code** (lint rules, build scripts, etc.) is exempt from this requirement.
-- Place tests next to the code they test: `index.test.(ts|tsx)` for main exports, or mirror the exact source file name (e.g. `use-thing.test.ts`).
-- Run `bun run test` after changes and fix all failures before finishing.
+- Unit tests for all exported functions, classes, non-trivial logic.
+- Exempt: dev-tool code (lint rules, build scripts).
+- Tests next to code: `index.test.(ts|tsx)` or mirror source name (`use-thing.test.ts`).
+- Run `bun test` after changes. Fix all failures before finishing.
