@@ -33,3 +33,14 @@ src/
 assets/
   images/            # Static image assets
 ```
+
+## Documentation
+
+- `docs/code-guidelines.md` — conventions for comments, style, naming, imports, testing, folder structure.
+- `docs/theme.md` — theme tokens, color scheme behavior, `useTheme` hook.
+
+## Conventions
+
+- Use skills for commits, components, modules, features, forms
+- **hook** skill = React hook (code). **agent-hook** skill = Claude Code automation hook (settings.json)
+- Fan out agents for parallel work

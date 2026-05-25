@@ -1,34 +1,26 @@
 # Theme System
 
-Resolvy uses a custom semantic token-based theme built on top of React Native's `useColorScheme`. All design tokens live in `src/constants/theme.ts` and are consumed through the `useTheme` hook.
+Custom semantic token-based theme built on React Native's `useColorScheme`. Tokens in `src/constants/theme.ts`, consumed via `useTheme` hook.
 
 ## Color Tokens
 
-Colors are organized as semantic pairs (e.g. `surface` / `onSurface`) so components always know which foreground color to use on a given background.
-
-The full token set is defined in `src/constants/theme.ts` under the `Colors` object, which exposes a `light` and a `dark` palette.
+Semantic pairs (`surface` / `onSurface`) ensure components know their foreground color. Full token set in `src/constants/theme.ts` — `Colors` object with `light` and `dark` palettes.
 
 ## Spacing, Sizing & Typography
 
-Tokens use a shared size key scale:
+Shared size scale: `tiny → extraSmall → small → medium → large → extraLarge → huge`
 
-```
-tiny → extraSmall → small → medium → large → extraLarge → huge
-```
+- `Spacing` — margin, padding
+- `Sizes` — component dimensions
+- `FontSizes` — text sizes
+- `LineHeights` — matching line heights
 
-- **Spacing** — margin / padding values
-- **Sizes** — component dimensions
-- **FontSizes** — text sizes
-- **LineHeights** — matching line heights
-
-See `src/constants/theme.ts` for the exact token values.
+Exact values in `src/constants/theme.ts`.
 
 ## Active Theme
 
-The `useTheme` hook (`src/hooks/use-theme/index.ts`) reads the device color scheme via React Native's `useColorScheme()`. It returns three possible values:
+`useTheme` hook (`src/hooks/use-theme/index.ts`) reads device color scheme via `useColorScheme()`. Returns:
 
-- `"light"`
-- `"dark"`
-- `"unspecified"` — the user's system theme has not been resolved yet
+- `"light"` | `"dark"` | `"unspecified"` — system theme not yet resolved
 
-When the scheme is `"unspecified"`, the hook falls back to the **dark** palette. Otherwise it uses `scheme` palette. Components such as `ThemedText` consume the active palette through this hook.
+`"unspecified"` falls back to **dark** palette. Components like `ThemedText` consume this hook.
