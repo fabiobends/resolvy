@@ -17,14 +17,14 @@ const sizeMap = {
  * @returns React element.
  */
 export function ThemedIcon(props: ThemedIconProps) {
-  const { name, color, size, testID } = props;
+  const { name, themeColor, size, testID } = props;
   const theme = useTheme();
 
   return (
     <Ionicons
       name={name}
       size={sizeMap[size]}
-      color={theme[color]}
+      color={theme[themeColor]}
       testID={testID}
     />
   );

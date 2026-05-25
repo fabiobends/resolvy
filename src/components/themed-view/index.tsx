@@ -10,8 +10,13 @@ import { ThemedViewProps } from "./types";
  * @returns React element.
  */
 export function ThemedView(props: ThemedViewProps) {
-  const { color, style, ...rest } = props;
+  const { themeColor, style, ...rest } = props;
   const theme = useTheme();
 
-  return <View style={[{ backgroundColor: theme[color] }, style]} {...rest} />;
+  return (
+    <View
+      style={[themeColor && { backgroundColor: theme[themeColor] }, style]}
+      {...rest}
+    />
+  );
 }

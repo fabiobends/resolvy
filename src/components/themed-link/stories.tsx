@@ -1,10 +1,16 @@
+import { StyleSheet } from "react-native";
 import type { Meta, StoryObj } from "@storybook/react-native";
 
 import { ThemedView } from "@/components/themed-view";
-import { Spacing } from "@/constants/theme";
-import { variantColorKeys } from "@/types/colors";
+import { Spacing, variantColorKeys } from "@/constants/theme";
 
 import { ThemedLink } from "./index";
+
+const styles = StyleSheet.create({
+  decoratorPadding: {
+    padding: Spacing.medium,
+  },
+});
 
 const meta: Meta<typeof ThemedLink> = {
   title: "ThemedLink",
@@ -15,7 +21,7 @@ const meta: Meta<typeof ThemedLink> = {
   },
   decorators: [
     (Story) => (
-      <ThemedView color="surface" style={{ padding: Spacing.medium }}>
+      <ThemedView themeColor="surface" style={styles.decoratorPadding}>
         <Story />
       </ThemedView>
     ),

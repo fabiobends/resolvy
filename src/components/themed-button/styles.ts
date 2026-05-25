@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { FontSizes, LineHeights, Spacing } from "@/constants/theme";
+import { LineHeights, Spacing } from "@/constants/theme";
 
 /** Component styles. */
 export const styles = StyleSheet.create({
@@ -9,13 +9,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     padding: Spacing.small,
     borderRadius: Spacing.extraSmall,
-  },
-  title: {
-    fontSize: FontSizes.medium,
-    lineHeight: LineHeights.medium,
-    fontWeight: "600",
+    minHeight: Spacing.small * 2 + LineHeights.medium,
   },
   disabled: {
     opacity: 0.4,
+  },
+  indicatorWrapper: {
+    height: LineHeights.medium,
+    justifyContent: "center",
   },
 });

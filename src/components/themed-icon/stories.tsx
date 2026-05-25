@@ -24,11 +24,11 @@ type Story = StoryObj<typeof ThemedIcon>;
 export const PrimarySmall: Story = {
   args: {
     name: "sunny-outline",
-    color: "primary",
+    themeColor: "primary",
     size: "small",
   },
   render: (args) => (
-    <ThemedView color="surface" style={styles.container}>
+    <ThemedView themeColor="surface" style={styles.container}>
       <ThemedIcon {...args} />
     </ThemedView>
   ),
@@ -37,11 +37,11 @@ export const PrimarySmall: Story = {
 export const SecondaryMedium: Story = {
   args: {
     name: "moon-outline",
-    color: "secondary",
+    themeColor: "secondary",
     size: "medium",
   },
   render: (args) => (
-    <ThemedView color="surface" style={styles.container}>
+    <ThemedView themeColor="surface" style={styles.container}>
       <ThemedIcon {...args} />
     </ThemedView>
   ),
@@ -50,11 +50,11 @@ export const SecondaryMedium: Story = {
 export const SuccessLarge: Story = {
   args: {
     name: "checkmark-circle-outline",
-    color: "success",
+    themeColor: "success",
     size: "large",
   },
   render: (args) => (
-    <ThemedView color="surface" style={styles.container}>
+    <ThemedView themeColor="surface" style={styles.container}>
       <ThemedIcon {...args} />
     </ThemedView>
   ),
