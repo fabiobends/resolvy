@@ -3,20 +3,23 @@ import {
   DefaultTheme,
   ThemeProvider as NavigationThemeProvider,
 } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Constants, { ExecutionEnvironment } from "expo-constants";
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import Constants, { ExecutionEnvironment } from "expo-constants";
+import { Pressable, StyleSheet } from "react-native";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 
-import { Drawer } from "@/components/drawer";
 import { DevFloatingButton } from "@/components/dev-floating-button";
+import { Drawer } from "@/components/drawer";
 import { ThemedIcon } from "@/components/themed-icon";
 import { ThemedText } from "@/components/themed-text";
 import { Spacing } from "@/constants/theme";
-import { FeatureFlagsProvider } from "@/hooks/use-feature-flags/provider";
+import { AuthProvider } from "@/hooks/use-auth/provider";
 import { useFeatureFlags } from "@/hooks/use-feature-flags";
-import { ThemeProvider } from "@/hooks/use-theme/provider";
+import { FeatureFlagsProvider } from "@/hooks/use-feature-flags/provider";
 import { useThemeContext } from "@/hooks/use-theme/context";
+import { ThemeProvider } from "@/hooks/use-theme/provider";
 
 /**
  * True when running in Expo Go, a development build, or local bare build.
@@ -24,6 +27,8 @@ import { useThemeContext } from "@/hooks/use-theme/context";
  */
 const isDevBuild =
   Constants.executionEnvironment !== ExecutionEnvironment.Standalone;
+
+const queryClient = new QueryClient();
 
 function NavigationTheme() {
   const { activeTheme } = useThemeContext();
@@ -33,7 +38,8 @@ function NavigationTheme() {
       value={activeTheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(main)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
       </Stack>
     </NavigationThemeProvider>
   );
@@ -59,7 +65,7 @@ function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
           onPress={onNavigateToStorybook}
           style={styles.row}
         >
-          <ThemedIcon name="book" color="primary" size="medium" />
+          <ThemedIcon name="book" themeColor="primary" size="medium" />
           <ThemedText type="subtitle" themeColor="onSurface">
             Storybook
           </ThemedText>
@@ -83,7 +89,7 @@ function DevTools() {
   };
 
   return (
-    <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
+    <>
       <DevFloatingButton onPress={() => setMenuVisible(true)} />
       <Drawer
         visible={menuVisible}
@@ -92,7 +98,7 @@ function DevTools() {
       >
         <DevMenuContent onNavigateToStorybook={navigateToStorybook} />
       </Drawer>
-    </View>
+    </>
   );
 }
 
@@ -102,12 +108,18 @@ function DevTools() {
  */
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <FeatureFlagsProvider>
-        <NavigationTheme />
-        {isDevBuild && <DevTools />}
-      </FeatureFlagsProvider>
-    </ThemeProvider>
+    <KeyboardProvider>
+      <ThemeProvider>
+        <FeatureFlagsProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <NavigationTheme />
+              {isDevBuild && <DevTools />}
+            </AuthProvider>
+          </QueryClientProvider>
+        </FeatureFlagsProvider>
+      </ThemeProvider>
+    </KeyboardProvider>
   );
 }
 

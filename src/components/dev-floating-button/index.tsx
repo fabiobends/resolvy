@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { Animated, Dimensions, PanResponder, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -101,7 +101,7 @@ export function DevFloatingButton({ onPress }: DevFloatingButtonProps) {
         onPress={onPress}
         style={styles.pressable}
       >
-        <ThemedIcon name="bug" color="onError" size="medium" />
+        <ThemedIcon name="bug" themeColor="onError" size="medium" />
       </Pressable>
     </Animated.View>
   );
