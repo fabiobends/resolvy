@@ -45,7 +45,7 @@ describe("useFormModule", () => {
     const { result } = renderHook(
       () => {
         const form = useTestForm();
-        return useFormModule(form);
+        return useFormModule({ form });
       },
       { wrapper: Wrapper },
     );
