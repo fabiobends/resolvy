@@ -1,20 +1,22 @@
 import { useRef } from "react";
 import { Controller } from "react-hook-form";
-import { TextInput, View } from "react-native";
+import { TextInput } from "react-native";
 
 import { ThemedButton } from "@/components/themed-button";
 import { ThemedTextField } from "@/components/themed-text-field";
+import { ThemedView } from "@/components/themed-view";
 
+import { LoginLinksRow } from "../login-links";
 import { styles } from "./styles";
 import { FormModuleProps } from "./types";
 
-/** Renders email/password fields and submit button. */
+/** Renders email/password fields, submit button, and link row. */
 export function FormModule(props: FormModuleProps) {
   const { emailField, passwordField, submitButton, error = "" } = props;
   const passwordRef = useRef<TextInput>(null);
 
   return (
-    <View style={styles.container}>
+    <ThemedView themeColor="surface" style={styles.container}>
       <Controller
         control={emailField.control}
         name={emailField.name}
@@ -61,6 +63,8 @@ export function FormModule(props: FormModuleProps) {
         loading={submitButton.loading}
         onPress={submitButton.onPress}
       />
-    </View>
+
+      <LoginLinksRow />
+    </ThemedView>
   );
 }
