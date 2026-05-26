@@ -1,9 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-
 import { useFormModule } from "./modules/form/use-module";
 import { useLogoModule } from "./modules/logo/use-module";
-import { SignupFormData, signupSchema } from "./schema";
+import { useShared } from "./modules/shared";
 import { SignupScreenProps } from "./types";
 
 /**
@@ -11,14 +8,10 @@ import { SignupScreenProps } from "./types";
  * @returns Flat object mapping to child component props.
  */
 export function useSignupScreen(): SignupScreenProps {
-  const form = useForm<SignupFormData>({
-    mode: "onBlur",
-    resolver: zodResolver(signupSchema),
-    defaultValues: { firstName: "", lastName: "", email: "", password: "" },
-  });
+  const shared = useShared();
 
   const logoProps = useLogoModule();
-  const formProps = useFormModule(form);
+  const formProps = useFormModule(shared);
 
   return { logoProps, formProps };
 }
