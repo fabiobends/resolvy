@@ -24,8 +24,10 @@ description: Generate a new module inside a feature following Resolvy convention
 
 4. The component:
    - Receives all data via props (no internal state or effects)
-   - Use `FontSizes` / `LineHeights` for text dimensions, `Spacing` for padding/margin/borderRadius/gap, `Sizes` for width/height, and resolved colors from `useTheme()`.
-   - Use `<ThemedText type="..." themeColor="...">` for all text rendering — never apply `fontSize` or `fontWeight` via `style`.
+   - **Use `<ThemedView themeColor="...">` for all containers, never raw `View`.**
+   - **Use `<ThemedText type="..." themeColor="...">` for all text, never raw `Text`.**
+   - **Use `<ThemedIcon>` and themed button components** instead of raw Ionicons or RN `Button`.
+   - Use `FontSizes` / `LineHeights` for text dimensions, `Spacing` for padding/margin/borderRadius/gap, `Sizes` for width/height, and resolved colors from `useTheme()` — never hardcode hex or numeric values.
 
 5. No barrel files, no default exports, no hard-coded numeric values.
 
