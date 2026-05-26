@@ -61,6 +61,8 @@ description: Generate a new feature/screen following the Resolvy composition pat
 
 7. Use `FontSizes` / `LineHeights` for text dimensions, `Spacing` for padding/margin/borderRadius/gap, `Sizes` for width/height, and resolved colors from `useTheme()`. Use `<ThemedText type="..." themeColor="...">` for all text — never apply `fontSize` or `fontWeight` via `style`.
 
+   **Never use raw React Native primitives** (`View`, `Text`) directly in module components or screens. Always use the corresponding themed wrappers (`<ThemedView themeColor="...">`, `<ThemedText type="..." themeColor="...">`) so colors stay consistent and theme-aware.
+
 8. No barrel files, no default exports, no hard-coded values.
 
 9. **Never** combine token values with arithmetic (`sizes.small / 2`, `spacing.large * 2`, etc.). Choose the closest existing token from the correct scale instead.
