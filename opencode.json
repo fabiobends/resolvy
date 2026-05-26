@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "permission": {
+    "skill": {
+      "*": "allow",
+      "commit": "allow",
+      "component": "allow",
+      "feature": "allow",
+      "hook": "allow",
+      "module": "allow",
+      "form": "allow",
+      "agent-hook": "allow",
+      "caveman": "allow"
+    }
+  }
+}
