@@ -40,7 +40,6 @@ function TestFormModule(props: { error?: string; onPress?: () => void }) {
         title: "Log in",
         onPress,
         loading: false,
-        disabled: false,
       }}
       error={error}
     />

@@ -49,7 +49,6 @@ export const Default: Story = {
         title: "Log in",
         onPress: () => {},
         loading: false,
-        disabled: false,
       }}
     />
   ),
@@ -62,7 +61,6 @@ export const Loading: Story = {
         title: "Log in",
         onPress: () => {},
         loading: true,
-        disabled: true,
       }}
     />
   ),
@@ -75,7 +73,6 @@ export const Disabled: Story = {
         title: "Log in",
         onPress: () => {},
         loading: false,
-        disabled: true,
       }}
     />
   ),
@@ -88,7 +85,6 @@ export const WithError: Story = {
         title: "Log in",
         onPress: () => {},
         loading: false,
-        disabled: false,
       }}
       error="Invalid credentials"
     />
