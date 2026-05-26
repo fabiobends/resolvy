@@ -42,7 +42,9 @@ app-example
 /ios
 /android
 
+## Plans
+plans/
+
 ## Claude
 .claude/worktrees/
-.claude/plans/
 

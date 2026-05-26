@@ -14,7 +14,7 @@ description: Create a structured implementation plan as a single self-contained 
 
 ## Rules
 
-1. Create one file only: `.claude/plans/<feature-kebab-case>/index.html`.
+1. Create one file only: `plans/<feature-kebab-case>/index.html`.
 
 2. The folder name must be kebab-case and match the feature name.
 
