@@ -59,7 +59,6 @@ export const Default: Story = {
           title: "Log in",
           onPress: () => {},
           loading: false,
-          disabled: false,
         },
       }}
       socialProps={{ onGooglePress: () => {}, onApplePress: () => {} }}
@@ -76,7 +75,6 @@ export const Loading: Story = {
           title: "Log in",
           onPress: () => {},
           loading: true,
-          disabled: true,
         },
       }}
       socialProps={{ onGooglePress: () => {}, onApplePress: () => {} }}
@@ -93,7 +91,6 @@ export const WithError: Story = {
           title: "Log in",
           onPress: () => {},
           loading: false,
-          disabled: false,
         },
         error: "Invalid credentials",
       }}
