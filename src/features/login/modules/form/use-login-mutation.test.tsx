@@ -3,18 +3,15 @@ import { renderHook, waitFor } from "@testing-library/react-native";
 
 import { useLoginMutation } from "./use-login-mutation";
 
-jest.mock("@react-native-async-storage/async-storage", () => ({
-  __esModule: true,
-  default: {
-    getItem: jest.fn(() => Promise.resolve(null)),
-    setItem: jest.fn(() => Promise.resolve()),
-    removeItem: jest.fn(() => Promise.resolve()),
-  },
+jest.mock("../../services/auth", () => ({
+  login: jest.fn((credentials) =>
+    Promise.resolve({ id: "stub-user-id", email: credentials.email }),
+  ),
 }));
 
 function Wrapper({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient({
-    defaultOptions: { mutations: { retry: false } },
+    defaultOptions: { mutations: { retry: false, gcTime: 0 } },
   });
 
   return (
