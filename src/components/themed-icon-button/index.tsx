@@ -41,6 +41,7 @@ export function ThemedIconButton(props: ThemedIconButtonProps) {
 
   return (
     <Pressable
+      accessibilityRole="button"
       disabled={isInactive}
       style={(state) => [
         styles.container,
