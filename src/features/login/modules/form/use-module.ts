@@ -1,26 +1,25 @@
-import { UseFormReturn } from "react-hook-form";
-
 import { useLoginMutation } from "./use-login-mutation";
 import { LoginFormData } from "../../schema";
 import { FormModuleProps } from "./types";
+import { UseSharedProps } from "../shared";
 
 /**
  * Composes react-hook-form state and login mutation into form props.
- * @param form - The react-hook-form instance for the login form.
+ * @param shared - Shared state from useShared.
  * @returns Props for the FormModule component.
  */
 export function useFormModule(
-  form: UseFormReturn<LoginFormData>,
+  shared: Partial<UseSharedProps>,
 ): FormModuleProps {
   const loginMutation = useLoginMutation();
 
-  const onSubmit = form.handleSubmit((data) => {
+  const onSubmit = shared.form!.handleSubmit((data) => {
     loginMutation.mutate(data);
   });
 
   return {
     emailField: {
-      control: form.control,
+      control: shared.form!.control,
       name: "email",
       label: "Email",
       placeholder: "Enter your email",
@@ -28,7 +27,7 @@ export function useFormModule(
       autoCapitalize: "none",
     },
     passwordField: {
-      control: form.control,
+      control: shared.form!.control,
       name: "password",
       label: "Password",
       placeholder: "Enter your password",
