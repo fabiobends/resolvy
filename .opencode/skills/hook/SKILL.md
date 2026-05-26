@@ -1,0 +1,1 @@
+../../../.claude/skills/hook/SKILL.md
