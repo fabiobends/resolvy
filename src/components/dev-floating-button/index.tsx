@@ -1,6 +1,7 @@
 import { useCallback, useRef } from "react";
 import { Animated, Dimensions, PanResponder, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 
 import { ThemedIcon } from "@/components/themed-icon";
 import { useTheme } from "@/hooks/use-theme";
@@ -27,6 +28,7 @@ function clamp(value: number, min: number, max: number) {
 export function DevFloatingButton({ onPress }: DevFloatingButtonProps) {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const initialX = screenWidth - insets.right - BUTTON_SIZE - EDGE_MARGIN * 2;
   const initialY = screenHeight - insets.bottom - BUTTON_SIZE - EDGE_MARGIN * 2;
@@ -97,7 +99,7 @@ export function DevFloatingButton({ onPress }: DevFloatingButtonProps) {
     >
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel="Open dev menu"
+        accessibilityLabel={t("accessibility.openDevMenu")}
         onPress={onPress}
         style={styles.pressable}
       >
