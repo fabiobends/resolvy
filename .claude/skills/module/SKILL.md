@@ -17,9 +17,9 @@ description: Generate a new module inside a feature following Resolvy convention
 
 3. The hook:
    - Returns a typed props object matching the component's interface
-   - Accepts shared state via function arguments (injected by the screen hook)
-   - Is independently testable — no implicit dependencies
-   - **Must be agnostic** — never import or reference other modules. If two modules need to interact, the screen hook composes shared state and injects slices via arguments.
+   - Is independently testable — no implicit dependencies on any other module
+   - **Must be independent**. If two modules need to interact, the screen hook composes shared state and injects slices via arguments.
+   - Accepts shared state via `Partial<UseSharedProps>` prop when needed (injected by the screen hook)
    - Use `useRef` for values that change frequently but only matter on action (e.g., text input values used only on submit) to avoid unnecessary re-renders.
 
 4. The component:
@@ -174,9 +174,31 @@ describe("useHeaderModule", () => {
 ## Tips
 
 - Keep modules **self-contained**. If a hook or helper is only consumed by this module, keep it inside the module folder.
-- If something is used by **more than one module within the same feature**, extract it to a shared hook at `src/hooks/use-shared.ts` that exposes `UseSharedProps`. Modules that consume only a subset should accept `Partial<UseSharedProps>` as a prop.
+- When **two or more modules within the same feature** need the same state, create a shared hook under `src/features/<name>/modules/shared/` (e.g., `use-shared.ts`) that exposes `UseSharedProps`.
+- Modules receiving shared state accept `Partial<UseSharedProps>`. Use the non-null assertion operator `!` when the screen hook guarantees a property is present:
+
+  ```ts
+  export interface UseSharedProps {
+    form: UseFormReturn<FormData>;
+  }
+
+  export function useFormModule(
+    shared: Partial<UseSharedProps>,
+  ): FormModuleProps {
+    // Screen hook always provides form, so ! is safe here
+    const onSubmit = shared.form!.handleSubmit((data) => {
+      mutation.mutate(data);
+    });
+
+    return {
+      firstNameField: {
+        control: shared.form!.control,
+        // ...
+      },
+    };
+  }
+  ```
+
 - Use **composition** over deep nesting. Pass plain objects (props) rather than rendering children inside the hook.
 - Avoid adding `children` to module props unless the module is a layout wrapper.
 - Keep modules **focused on a single visual section** of the screen.
-- **Do not** put navigation or routing logic inside modules. Modules are presentational.
-- For cross-cutting concerns (e.g., theme, auth), use shared hooks in `src/hooks/` and compose them in the screen hook.
