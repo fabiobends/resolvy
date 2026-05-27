@@ -1,5 +1,5 @@
 import { useFormModule } from "./modules/form/use-module";
-import { useLogoModule } from "./modules/logo/use-module";
+import { useBrandBlockModule } from "./modules/brand-block/use-module";
 import { SignupScreenProps } from "./types";
 
 /**
@@ -7,8 +7,8 @@ import { SignupScreenProps } from "./types";
  * @returns Flat object mapping to child component props.
  */
 export function useSignupScreen(): SignupScreenProps {
-  const logoProps = useLogoModule();
+  const brandBlockProps = useBrandBlockModule();
   const formProps = useFormModule();
 
-  return { logoProps, formProps };
+  return { brandBlockProps, formProps };
 }

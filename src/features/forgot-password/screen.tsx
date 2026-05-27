@@ -4,7 +4,7 @@ import { KeyboardScrollView } from "@/components/keyboard-scroll-view";
 import { KeyboardToolbarView } from "@/components/keyboard-toolbar-view";
 
 import { FormModule } from "./modules/form";
-import { LogoModule } from "./modules/logo";
+import { BrandBlock } from "./modules/brand-block";
 import { styles } from "./styles";
 import { ForgotPasswordScreenProps } from "./types";
 import { useForgotPasswordScreen } from "./use-screen";
@@ -15,7 +15,7 @@ import { useForgotPasswordScreen } from "./use-screen";
  * @returns React element.
  */
 export function ForgotPasswordScreenView({
-  logoProps,
+  brandBlockProps,
   formProps,
 }: ForgotPasswordScreenProps) {
   return (
@@ -24,7 +24,7 @@ export function ForgotPasswordScreenView({
         contentContainerStyle={styles.scrollContent}
         themeColor="surface"
       >
-        <LogoModule {...logoProps} />
+        <BrandBlock {...brandBlockProps} />
         <FormModule {...formProps} />
       </KeyboardScrollView>
       <KeyboardToolbarView onDonePress={formProps.submitButton.onPress} />

@@ -35,8 +35,8 @@ describe("useForgotPasswordScreen", () => {
       wrapper: Wrapper,
     });
 
-    expect(result.current.logoProps).toBeDefined();
-    expect(result.current.logoProps.title).toBe("Resolvy");
+    expect(result.current.brandBlockProps).toBeDefined();
+    expect(result.current.brandBlockProps.title).toBe("Resolvy");
 
     expect(result.current.formProps).toBeDefined();
     expect(result.current.formProps.emailField.name).toBe("email");

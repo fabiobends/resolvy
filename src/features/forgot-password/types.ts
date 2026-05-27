@@ -1,8 +1,8 @@
 import { FormModuleProps } from "./modules/form/types";
-import { LogoModuleProps } from "./modules/logo/types";
+import { BrandBlockProps } from "./modules/brand-block/types";
 
 /** Props passed from the forgot-password screen hook to the screen component. */
 export interface ForgotPasswordScreenProps {
-  logoProps: LogoModuleProps;
+  brandBlockProps: BrandBlockProps;
   formProps: FormModuleProps;
 }

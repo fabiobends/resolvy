@@ -67,7 +67,7 @@ function ScreenStory(
 export const Default: Story = {
   render: () => (
     <ScreenStory
-      logoProps={{ title: "Resolvy" }}
+      brandBlockProps={{ title: "Resolvy" }}
       formProps={{
         submitButton: {
           title: "Sign Up",
@@ -82,7 +82,7 @@ export const Default: Story = {
 export const Loading: Story = {
   render: () => (
     <ScreenStory
-      logoProps={{ title: "Resolvy" }}
+      brandBlockProps={{ title: "Resolvy" }}
       formProps={{
         submitButton: {
           title: "Sign Up",
@@ -97,7 +97,7 @@ export const Loading: Story = {
 export const WithError: Story = {
   render: () => (
     <ScreenStory
-      logoProps={{ title: "Resolvy" }}
+      brandBlockProps={{ title: "Resolvy" }}
       formProps={{
         submitButton: {
           title: "Sign Up",
