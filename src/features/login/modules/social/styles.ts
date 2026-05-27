@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
   container: {
     width: "100%",
     gap: Spacing.medium,
+    marginTop: Spacing.medium,
   },
   dividerRow: {
     flexDirection: "row",

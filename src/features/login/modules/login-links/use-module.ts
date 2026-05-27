@@ -1,3 +1,5 @@
+import { useRouter } from "expo-router";
+
 import { LoginLinksRowProps } from "./types";
 
 /**
@@ -5,12 +7,14 @@ import { LoginLinksRowProps } from "./types";
  * @returns Props for the LoginLinksRow component.
  */
 export function useLoginLinksModule(): LoginLinksRowProps {
+  const router = useRouter();
+
   return {
     onForgotPasswordPress: () => {
       console.log("Forgot password");
     },
     onCreateAccountPress: () => {
-      console.log("Create account");
+      router.push("/signup");
     },
   };
 }
