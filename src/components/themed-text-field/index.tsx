@@ -1,8 +1,8 @@
 import { forwardRef, useState } from "react";
 import { Pressable, TextInput } from "react-native";
 
-import { ThemedView } from "@/components/themed-view";
 import { ThemedIcon } from "@/components/themed-icon";
+import { ThemedView } from "@/components/themed-view";
 
 import { ThemedText } from "@/components/themed-text";
 import { useTheme } from "@/hooks/use-theme";
@@ -25,19 +25,26 @@ export const ThemedTextField = forwardRef<TextInput, ThemedTextFieldProps>(
       variantColor,
       disabled,
       errorText,
+      hasFieldError,
       helperText,
+      successText,
       secureTextEntry,
       style,
       ...rest
     } = props;
     const theme = useTheme();
     const hasError = !!errorText;
+    const fieldError = hasFieldError;
+    const hasSuccess = !!successText;
     const [isSecure, setIsSecure] = useState(secureTextEntry ?? false);
     const showToggle = secureTextEntry != null;
 
     return (
       <ThemedView style={[styles.container, disabled && styles.disabled]}>
-        <ThemedText type="label" themeColor={hasError ? "error" : variantColor}>
+        <ThemedText
+          type="label"
+          themeColor={fieldError ? "error" : variantColor}
+        >
           {label}
         </ThemedText>
         <ThemedView style={styles.inputWrapper}>
@@ -51,7 +58,7 @@ export const ThemedTextField = forwardRef<TextInput, ThemedTextFieldProps>(
               showToggle && styles.inputWithIcon,
               {
                 color: theme.onSurface,
-                borderColor: hasError ? theme.error : theme[variantColor],
+                borderColor: fieldError ? theme.error : theme[variantColor],
               },
               style,
             ]}
@@ -72,9 +79,11 @@ export const ThemedTextField = forwardRef<TextInput, ThemedTextFieldProps>(
         </ThemedView>
         <ThemedText
           type="label"
-          themeColor={hasError ? "error" : "onSurfaceDim"}
+          themeColor={
+            hasSuccess ? "success" : hasError ? "error" : "onSurfaceDim"
+          }
         >
-          {errorText ?? helperText ?? " "}
+          {successText ?? errorText ?? helperText ?? " "}
         </ThemedText>
       </ThemedView>
     );

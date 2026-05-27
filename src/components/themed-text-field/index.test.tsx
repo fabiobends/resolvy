@@ -67,4 +67,30 @@ describe("ThemedTextField", () => {
     expect(getByText("Invalid email")).toBeTruthy();
     expect(queryByText("Must be a valid email")).toBeNull();
   });
+
+  it("renders success text when provided", () => {
+    const { getByText } = render(
+      <ThemedTextField
+        label="Email"
+        variantColor="primary"
+        successText="Email confirmed"
+      />,
+    );
+    expect(getByText("Email confirmed")).toBeTruthy();
+  });
+
+  it("renders success text over error and helper text", () => {
+    const { getByText, queryByText } = render(
+      <ThemedTextField
+        label="Email"
+        variantColor="primary"
+        helperText="Must be valid"
+        errorText="Invalid"
+        successText="Done"
+      />,
+    );
+    expect(getByText("Done")).toBeTruthy();
+    expect(queryByText("Invalid")).toBeNull();
+    expect(queryByText("Must be valid")).toBeNull();
+  });
 });

@@ -8,5 +8,7 @@ export type ThemedTextFieldProps = TextInputProps & {
   variantColor: VariantColor;
   disabled?: boolean;
   errorText?: string;
+  hasFieldError?: boolean;
   helperText?: string;
+  successText?: string;
 };
