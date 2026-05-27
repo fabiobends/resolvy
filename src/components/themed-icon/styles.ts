@@ -16,4 +16,8 @@ export const styles = StyleSheet.create({
     width: Sizes.large,
     height: Sizes.large,
   },
+  extraLarge: {
+    width: Sizes.extraLarge,
+    height: Sizes.extraLarge,
+  },
 });
