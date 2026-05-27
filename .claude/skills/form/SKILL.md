@@ -27,33 +27,30 @@ Wrap the screen in `SafeAreaView edges={["bottom"]}` and place `KeyboardScrollVi
 
 A form module has three layers:
 
-1. **Screen hook** (`useLoginScreen`) — creates the `useForm` instance and passes it to the form module hook.
-2. **Form module hook** (`useFormModule`) — composes `react-hook-form` + mutations/API calls into `FormModuleProps`.
+1. **Screen hook** (`useLoginScreen`) — composes module hooks.
+2. **Form module hook** (`useFormModule`) — owns `react-hook-form` instance, composes mutations/API calls into `FormModuleProps`.
 3. **Form module component** (`FormModule`) — receives props, wires `Controller`, refs, and focus chaining.
 
 ### Screen Hook
 
 ```tsx
 export function useLoginScreen(): LoginScreenProps {
-  const form = useForm<LoginFormData>({
-    mode: "onBlur",
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  });
+  const logoProps = useLogoModule();
+  const formProps = useFormModule();
 
-  const formProps = useFormModule(form);
-  // ... other modules
-
-  return { formProps /* ... */ };
+  return { formProps, logoProps };
 }
 ```
 
 ### Form Module Hook
 
 ```tsx
-export function useFormModule(
-  form: UseFormReturn<LoginFormData>,
-): FormModuleProps {
+export function useFormModule(): FormModuleProps {
+  const form = useForm<LoginFormData>({
+    mode: "onBlur",
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: "", password: "" },
+  });
   const mutation = useLoginMutation();
 
   const onSubmit = form.handleSubmit((data) => {
