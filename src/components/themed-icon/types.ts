@@ -6,6 +6,6 @@ import { ThemeColor } from "@/constants/theme";
 export type ThemedIconProps = {
   name: keyof typeof Ionicons.glyphMap;
   themeColor: ThemeColor;
-  size: "small" | "medium" | "large";
+  size: "small" | "medium" | "large" | "extraLarge";
   testID?: string;
 };

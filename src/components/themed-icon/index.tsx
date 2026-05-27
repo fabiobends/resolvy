@@ -9,6 +9,7 @@ const sizeMap = {
   small: styles.small.width,
   medium: styles.medium.width,
   large: styles.large.width,
+  extraLarge: styles.extraLarge.width,
 } as const;
 
 /**
