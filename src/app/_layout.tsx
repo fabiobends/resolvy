@@ -9,6 +9,7 @@ import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
+import { I18nextProvider, useTranslation } from "react-i18next";
 
 import { DevFloatingButton } from "@/components/dev-floating-button";
 import { Drawer } from "@/components/drawer";
@@ -20,6 +21,7 @@ import { useFeatureFlags } from "@/hooks/use-feature-flags";
 import { FeatureFlagsProvider } from "@/hooks/use-feature-flags/provider";
 import { ThemePreference, useThemeContext } from "@/hooks/use-theme/context";
 import { ThemeProvider } from "@/hooks/use-theme/provider";
+import i18n from "@/localization/i18n";
 
 /**
  * True when running in Expo Go, a development build, or local bare build.
@@ -62,12 +64,23 @@ interface DevMenuContentProps {
 function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
   const { flags } = useFeatureFlags();
   const { theme, setTheme } = useThemeContext();
+  const { t, i18n } = useTranslation();
 
   const cycleTheme = () => {
     const order: ThemePreference[] = ["light", "dark", "system"];
     const next = order[(order.indexOf(theme) + 1) % order.length];
     setTheme(next);
   };
+
+  const toggleLanguage = () => {
+    const next = i18n.language === "pt" ? "en" : "pt";
+    i18n.changeLanguage(next);
+  };
+
+  const currentLanguageLabel =
+    i18n.language === "pt"
+      ? t("devMenu.languagePortuguese")
+      : t("devMenu.languageEnglish");
 
   return (
     <>
@@ -79,7 +92,7 @@ function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
         >
           <ThemedIcon name="book" themeColor="primary" size="medium" />
           <ThemedText type="subtitle" themeColor="onSurface">
-            Storybook
+            {t("devMenu.storybook")}
           </ThemedText>
         </Pressable>
       )}
@@ -96,7 +109,17 @@ function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
           size="medium"
         />
         <ThemedText type="subtitle" themeColor="onSurface">
-          Theme: {theme}
+          {t("devMenu.theme")}: {theme}
+        </ThemedText>
+      </Pressable>
+      <Pressable
+        accessibilityRole="button"
+        onPress={toggleLanguage}
+        style={styles.row}
+      >
+        <ThemedIcon name="language" themeColor="primary" size="medium" />
+        <ThemedText type="subtitle" themeColor="onSurface">
+          {t("devMenu.language")}: {currentLanguageLabel}
         </ThemedText>
       </Pressable>
     </>
@@ -110,6 +133,7 @@ function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
 function DevTools() {
   const [menuVisible, setMenuVisible] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const navigateToStorybook = () => {
     setMenuVisible(false);
@@ -121,7 +145,7 @@ function DevTools() {
       <DevFloatingButton onPress={() => setMenuVisible(true)} />
       <Drawer
         visible={menuVisible}
-        title="Dev Menu"
+        title={t("devMenu.title")}
         onClose={() => setMenuVisible(false)}
       >
         <DevMenuContent onNavigateToStorybook={navigateToStorybook} />
@@ -137,16 +161,18 @@ function DevTools() {
 export default function RootLayout() {
   return (
     <KeyboardProvider>
-      <ThemeProvider>
-        <FeatureFlagsProvider>
-          <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-              <NavigationTheme />
-              {isDevBuild && <DevTools />}
-            </AuthProvider>
-          </QueryClientProvider>
-        </FeatureFlagsProvider>
-      </ThemeProvider>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider>
+          <FeatureFlagsProvider>
+            <QueryClientProvider client={queryClient}>
+              <AuthProvider>
+                <NavigationTheme />
+                {isDevBuild && <DevTools />}
+              </AuthProvider>
+            </QueryClientProvider>
+          </FeatureFlagsProvider>
+        </ThemeProvider>
+      </I18nextProvider>
     </KeyboardProvider>
   );
 }
