@@ -1,4 +1,5 @@
 import { Pressable } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import { ThemedIcon } from "@/components/themed-icon";
 import { ThemedText } from "@/components/themed-text";
@@ -16,15 +17,20 @@ import { ThemeSwitcherProps } from "./types";
 export function ThemeSwitcher(props: ThemeSwitcherProps) {
   const { activeTheme, onToggle } = props;
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <ThemedView themeColor="surfaceDim" style={styles.container}>
       <ThemedText type="body" themeColor="onSurface">
-        Theme: {activeTheme}
+        {t("home.themeLabel", { theme: activeTheme })}
       </ThemedText>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={`Switch to ${activeTheme === "dark" ? "light" : "dark"} mode`}
+        accessibilityLabel={
+          activeTheme === "dark"
+            ? t("accessibility.switchToLightMode")
+            : t("accessibility.switchToDarkMode")
+        }
         onPress={onToggle}
         style={[styles.button, { backgroundColor: theme.primary }]}
       >
