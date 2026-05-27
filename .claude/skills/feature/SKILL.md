@@ -80,6 +80,9 @@ src/features/<name>/
   constants.ts
   use-screen.test.ts
   modules/
+    shared/
+      index.ts         — shared hook when 2+ modules need same state
+      index.test.ts    — unit tests for the shared hook
     <module>/
       index.tsx
       use-module.ts
