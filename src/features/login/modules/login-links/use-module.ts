@@ -11,7 +11,7 @@ export function useLoginLinksModule(): LoginLinksRowProps {
 
   return {
     onForgotPasswordPress: () => {
-      console.log("Forgot password");
+      router.push("/forgot-password");
     },
     onCreateAccountPress: () => {
       router.push("/signup");

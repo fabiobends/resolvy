@@ -49,7 +49,8 @@ export function FormModule(props: FormModuleProps) {
             value={value}
             onChangeText={onChange}
             onBlur={onBlur}
-            errorText={fieldState.error?.message || error}
+            errorText={fieldState.error?.message || error || undefined}
+            hasFieldError={!!fieldState.error?.message}
             returnKeyType="done"
             onSubmitEditing={submitButton.onPress}
           />
