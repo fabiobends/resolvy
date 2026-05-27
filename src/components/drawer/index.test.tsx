@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react-native";
-import { ThemedText } from "@/components/themed-text";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { ThemedText } from "@/components/themed-text";
 
 import { Drawer } from "./index";
 

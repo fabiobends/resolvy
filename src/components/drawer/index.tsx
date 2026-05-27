@@ -6,6 +6,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 
 import { ThemedIcon } from "@/components/themed-icon";
 import { ThemedText } from "@/components/themed-text";
@@ -28,6 +29,7 @@ import { DrawerProps } from "./types";
 export function Drawer({ visible, onClose, title, children }: DrawerProps) {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const translateY = useSharedValue(SLIDE_DISTANCE);
   const opacity = useSharedValue(0);
@@ -64,7 +66,7 @@ export function Drawer({ visible, onClose, title, children }: DrawerProps) {
       >
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Close drawer"
+          accessibilityLabel={t("accessibility.closeDrawer")}
           style={styles.backdropPressable}
           onPress={onClose}
         />
@@ -86,7 +88,7 @@ export function Drawer({ visible, onClose, title, children }: DrawerProps) {
           </ThemedText>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Close drawer"
+            accessibilityLabel={t("accessibility.closeDrawer")}
             onPress={onClose}
             style={styles.closeButton}
           >
