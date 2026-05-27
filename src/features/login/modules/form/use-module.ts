@@ -1,25 +1,30 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 import { useLoginMutation } from "./use-login-mutation";
-import { LoginFormData } from "../../schema";
+import { LoginFormData, loginSchema } from "../../schema";
 import { FormModuleProps } from "./types";
-import { UseSharedProps } from "../shared";
 
 /**
  * Composes react-hook-form state and login mutation into form props.
- * @param shared - Shared state from useShared.
  * @returns Props for the FormModule component.
  */
-export function useFormModule(
-  shared: Partial<UseSharedProps>,
-): FormModuleProps {
+export function useFormModule(): FormModuleProps {
+  const form = useForm<LoginFormData>({
+    mode: "onBlur",
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: "", password: "" },
+  });
+
   const loginMutation = useLoginMutation();
 
-  const onSubmit = shared.form!.handleSubmit((data) => {
+  const onSubmit = form.handleSubmit((data) => {
     loginMutation.mutate(data);
   });
 
   return {
     emailField: {
-      control: shared.form!.control,
+      control: form.control,
       name: "email",
       label: "Email",
       placeholder: "Enter your email",
@@ -27,7 +32,7 @@ export function useFormModule(
       autoCapitalize: "none",
     },
     passwordField: {
-      control: shared.form!.control,
+      control: form.control,
       name: "password",
       label: "Password",
       placeholder: "Enter your password",

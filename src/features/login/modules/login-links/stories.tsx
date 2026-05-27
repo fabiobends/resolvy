@@ -11,5 +11,10 @@ export default meta;
 type Story = StoryObj<typeof LoginLinksRow>;
 
 export const Default: Story = {
-  render: () => <LoginLinksRow />,
+  render: () => (
+    <LoginLinksRow
+      onForgotPasswordPress={() => {}}
+      onCreateAccountPress={() => {}}
+    />
+  ),
 };

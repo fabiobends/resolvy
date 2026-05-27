@@ -1,4 +1,5 @@
 import { FormModuleProps } from "./modules/form/types";
+import { LoginLinksRowProps } from "./modules/login-links/types";
 import { LogoModuleProps } from "./modules/logo/types";
 import { SocialModuleProps } from "./modules/social/types";
 
@@ -6,5 +7,6 @@ import { SocialModuleProps } from "./modules/social/types";
 export interface LoginScreenProps {
   logoProps: LogoModuleProps;
   formProps: FormModuleProps;
+  linksProps: LoginLinksRowProps;
   socialProps: SocialModuleProps;
 }

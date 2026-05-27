@@ -1,11 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook } from "@testing-library/react-native";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ThemeProvider } from "@/hooks/use-theme/provider";
 
-import { loginSchema, LoginFormData } from "../../schema";
 import { useFormModule } from "./use-module";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
@@ -32,23 +29,11 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-function useTestForm() {
-  return useForm<LoginFormData>({
-    mode: "onBlur",
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  });
-}
-
 describe("useFormModule", () => {
   it("returns field configs and a submit handler", () => {
-    const { result } = renderHook(
-      () => {
-        const form = useTestForm();
-        return useFormModule({ form });
-      },
-      { wrapper: Wrapper },
-    );
+    const { result } = renderHook(() => useFormModule(), {
+      wrapper: Wrapper,
+    });
 
     expect(result.current.emailField.name).toBe("email");
     expect(result.current.passwordField.name).toBe("password");
