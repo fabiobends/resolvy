@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { useRequestPasswordResetMutation } from "./use-request-password-reset-mutation";
 import { ForgotPasswordFormData, forgotPasswordSchema } from "../../schema";
@@ -10,6 +11,8 @@ import { FormModuleProps } from "./types";
  * @returns Props for the FormModule component.
  */
 export function useFormModule(): FormModuleProps {
+  const { t } = useTranslation();
+
   const form = useForm<ForgotPasswordFormData>({
     mode: "onBlur",
     resolver: zodResolver(forgotPasswordSchema),
@@ -26,21 +29,20 @@ export function useFormModule(): FormModuleProps {
     emailField: {
       control: form.control,
       name: "email",
-      label: "Email",
-      placeholder: "Enter your email",
+      label: t("common.email"),
+      placeholder: t("placeholders.email"),
       keyboardType: "email-address",
       autoCapitalize: "none",
       successText: resetMutation.isSuccess
-        ? "Reset link sent. Check your email inbox."
+        ? t("forgotPassword.success")
         : undefined,
     },
     submitButton: {
-      title: "Send reset link",
+      title: t("forgotPassword.submit"),
       onPress: onSubmit,
       loading: resetMutation.isPending,
     },
     error: resetMutation.error?.message,
-    infoBanner:
-      "Make sure to check your spam or junk folder. The reset link expires after 24 hours and can only be used once.",
+    infoBanner: t("forgotPassword.infoBanner"),
   };
 }

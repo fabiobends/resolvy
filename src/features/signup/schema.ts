@@ -1,20 +1,21 @@
+import i18n from "@/localization/i18n";
 import { z } from "zod";
 
 /** Validation schema for the signup form. */
 export const signupSchema = z.object({
   firstName: z
     .string()
-    .min(1, "First name is required")
-    .min(2, "First name must be at least 2 characters"),
+    .min(1, i18n.t("validation.firstNameRequired"))
+    .min(2, i18n.t("validation.firstNameMinLength")),
   lastName: z
     .string()
-    .min(1, "Last name is required")
-    .min(2, "Last name must be at least 2 characters"),
-  email: z.email("Enter a valid email address"),
+    .min(1, i18n.t("validation.lastNameRequired"))
+    .min(2, i18n.t("validation.lastNameMinLength")),
+  email: z.email(i18n.t("validation.email")),
   password: z
     .string()
-    .min(1, "Password is required")
-    .min(6, "Password must be at least 6 characters"),
+    .min(1, i18n.t("validation.passwordRequired"))
+    .min(6, i18n.t("validation.passwordMinLength")),
 });
 
 /** Inferred form data type from the signup schema. */

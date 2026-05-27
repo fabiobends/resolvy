@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { useLoginMutation } from "./use-login-mutation";
 import { LoginFormData, loginSchema } from "../../schema";
@@ -10,6 +11,8 @@ import { FormModuleProps } from "./types";
  * @returns Props for the FormModule component.
  */
 export function useFormModule(): FormModuleProps {
+  const { t } = useTranslation();
+
   const form = useForm<LoginFormData>({
     mode: "onBlur",
     resolver: zodResolver(loginSchema),
@@ -26,20 +29,20 @@ export function useFormModule(): FormModuleProps {
     emailField: {
       control: form.control,
       name: "email",
-      label: "Email",
-      placeholder: "Enter your email",
+      label: t("common.email"),
+      placeholder: t("placeholders.email"),
       keyboardType: "email-address",
       autoCapitalize: "none",
     },
     passwordField: {
       control: form.control,
       name: "password",
-      label: "Password",
-      placeholder: "Enter your password",
+      label: t("common.password"),
+      placeholder: t("placeholders.password"),
       secureTextEntry: true,
     },
     submitButton: {
-      title: "Log in",
+      title: t("login.submit"),
       onPress: onSubmit,
       loading: loginMutation.isPending,
     },
