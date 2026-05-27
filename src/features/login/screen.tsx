@@ -2,8 +2,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { KeyboardScrollView } from "@/components/keyboard-scroll-view";
 import { KeyboardToolbarView } from "@/components/keyboard-toolbar-view";
-import { LoginLinksRow } from "./modules/login-links";
 import { FormModule } from "./modules/form";
+import { LoginLinksRow } from "./modules/login-links";
 import { LogoModule } from "./modules/logo";
 import { SocialModule } from "./modules/social";
 import { styles } from "./styles";

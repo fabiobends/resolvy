@@ -7,5 +7,6 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     gap: Spacing.small,
+    marginBottom: Spacing.large,
   },
 });
