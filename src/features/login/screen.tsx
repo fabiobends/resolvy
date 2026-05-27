@@ -4,7 +4,7 @@ import { KeyboardScrollView } from "@/components/keyboard-scroll-view";
 import { KeyboardToolbarView } from "@/components/keyboard-toolbar-view";
 import { FormModule } from "./modules/form";
 import { LoginLinksRow } from "./modules/login-links";
-import { LogoModule } from "./modules/logo";
+import { BrandBlock } from "./modules/brand-block";
 import { SocialModule } from "./modules/social";
 import { styles } from "./styles";
 import { LoginScreenProps } from "./types";
@@ -16,7 +16,7 @@ import { useLoginScreen } from "./use-screen";
  * @returns React element.
  */
 export function LoginScreenView({
-  logoProps,
+  brandBlockProps,
   formProps,
   linksProps,
   socialProps,
@@ -27,7 +27,7 @@ export function LoginScreenView({
         contentContainerStyle={styles.scrollContent}
         themeColor="surface"
       >
-        <LogoModule {...logoProps} />
+        <BrandBlock {...brandBlockProps} />
         <FormModule {...formProps} />
         <LoginLinksRow {...linksProps} />
         <SocialModule {...socialProps} />

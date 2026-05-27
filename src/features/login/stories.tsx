@@ -53,7 +53,7 @@ function ScreenStory(
 export const Default: Story = {
   render: () => (
     <ScreenStory
-      logoProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
+      brandBlockProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
       linksProps={{
         onForgotPasswordPress: () => {},
         onCreateAccountPress: () => {},
@@ -73,7 +73,7 @@ export const Default: Story = {
 export const Loading: Story = {
   render: () => (
     <ScreenStory
-      logoProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
+      brandBlockProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
       linksProps={{
         onForgotPasswordPress: () => {},
         onCreateAccountPress: () => {},
@@ -93,7 +93,7 @@ export const Loading: Story = {
 export const WithError: Story = {
   render: () => (
     <ScreenStory
-      logoProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
+      brandBlockProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
       linksProps={{
         onForgotPasswordPress: () => {},
         onCreateAccountPress: () => {},

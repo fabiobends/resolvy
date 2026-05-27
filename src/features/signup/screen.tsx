@@ -4,7 +4,7 @@ import { KeyboardScrollView } from "@/components/keyboard-scroll-view";
 import { KeyboardToolbarView } from "@/components/keyboard-toolbar-view";
 
 import { FormModule } from "./modules/form";
-import { LogoModule } from "./modules/logo";
+import { BrandBlock } from "./modules/brand-block";
 import { styles } from "./styles";
 import { SignupScreenProps } from "./types";
 import { useSignupScreen } from "./use-screen";
@@ -14,14 +14,17 @@ import { useSignupScreen } from "./use-screen";
  * @param props - Component props.
  * @returns React element.
  */
-export function SignupScreenView({ logoProps, formProps }: SignupScreenProps) {
+export function SignupScreenView({
+  brandBlockProps,
+  formProps,
+}: SignupScreenProps) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardScrollView
         contentContainerStyle={styles.scrollContent}
         themeColor="surface"
       >
-        <LogoModule {...logoProps} />
+        <BrandBlock {...brandBlockProps} />
         <FormModule {...formProps} />
       </KeyboardScrollView>
       <KeyboardToolbarView onDonePress={formProps.submitButton.onPress} />

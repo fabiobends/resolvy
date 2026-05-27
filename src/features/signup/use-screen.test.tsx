@@ -35,9 +35,9 @@ describe("useSignupScreen", () => {
       wrapper: Wrapper,
     });
 
-    expect(result.current.logoProps).toBeDefined();
-    expect(result.current.logoProps.title).toBe("Resolvy");
-    expect(result.current.logoProps.subtitle).toBeUndefined();
+    expect(result.current.brandBlockProps).toBeDefined();
+    expect(result.current.brandBlockProps.title).toBe("Resolvy");
+    expect(result.current.brandBlockProps.subtitle).toBeUndefined();
 
     expect(result.current.formProps).toBeDefined();
     expect(result.current.formProps.firstNameField.name).toBe("firstName");

@@ -1,6 +1,6 @@
 import { useFormModule } from "./modules/form/use-module";
 import { useLoginLinksModule } from "./modules/login-links/use-module";
-import { useLogoModule } from "./modules/logo/use-module";
+import { useBrandBlockModule } from "./modules/brand-block/use-module";
 import { useSocialModule } from "./modules/social/use-module";
 import { LoginScreenProps } from "./types";
 
@@ -9,10 +9,10 @@ import { LoginScreenProps } from "./types";
  * @returns Flat object mapping to child component props.
  */
 export function useLoginScreen(): LoginScreenProps {
-  const logoProps = useLogoModule();
+  const brandBlockProps = useBrandBlockModule();
   const formProps = useFormModule();
   const linksProps = useLoginLinksModule();
   const socialProps = useSocialModule();
 
-  return { logoProps, formProps, linksProps, socialProps };
+  return { brandBlockProps, formProps, linksProps, socialProps };
 }
