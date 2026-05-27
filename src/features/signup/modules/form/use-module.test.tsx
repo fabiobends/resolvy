@@ -1,11 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook } from "@testing-library/react-native";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ThemeProvider } from "@/hooks/use-theme/provider";
 
-import { signupSchema, SignupFormData } from "../../schema";
 import { useFormModule } from "./use-module";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
@@ -32,23 +29,11 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-function useTestForm() {
-  return useForm<SignupFormData>({
-    mode: "onBlur",
-    resolver: zodResolver(signupSchema),
-    defaultValues: { firstName: "", lastName: "", email: "", password: "" },
-  });
-}
-
 describe("useFormModule", () => {
   it("returns field configs and a submit handler", () => {
-    const { result } = renderHook(
-      () => {
-        const form = useTestForm();
-        return useFormModule({ form });
-      },
-      { wrapper: Wrapper },
-    );
+    const { result } = renderHook(() => useFormModule(), {
+      wrapper: Wrapper,
+    });
 
     expect(result.current.firstNameField.name).toBe("firstName");
     expect(result.current.lastNameField.name).toBe("lastName");

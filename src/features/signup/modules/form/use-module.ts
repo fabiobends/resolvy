@@ -1,38 +1,44 @@
-import { UseSharedProps } from "../shared/types";
-import { FormModuleProps } from "./types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 import { useSignupMutation } from "./use-signup-mutation";
+import { SignupFormData, signupSchema } from "../../schema";
+import { FormModuleProps } from "./types";
 
 /**
  * Composes react-hook-form state and signup mutation into form props.
- * @param shared - Shared state from useShared.
  * @returns Props for the FormModule component.
  */
-export function useFormModule(
-  shared: Partial<UseSharedProps>,
-): FormModuleProps {
+export function useFormModule(): FormModuleProps {
+  const form = useForm<SignupFormData>({
+    mode: "onBlur",
+    resolver: zodResolver(signupSchema),
+    defaultValues: { firstName: "", lastName: "", email: "", password: "" },
+  });
+
   const signupMutation = useSignupMutation();
 
-  const onSubmit = shared.form!.handleSubmit((data) => {
+  const onSubmit = form.handleSubmit((data) => {
     signupMutation.mutate(data);
   });
 
   return {
     firstNameField: {
-      control: shared.form!.control,
+      control: form.control,
       name: "firstName",
       label: "First name",
       placeholder: "Enter your first name",
       autoCapitalize: "words",
     },
     lastNameField: {
-      control: shared.form!.control,
+      control: form.control,
       name: "lastName",
       label: "Last name",
       placeholder: "Enter your last name",
       autoCapitalize: "words",
     },
     emailField: {
-      control: shared.form!.control,
+      control: form.control,
       name: "email",
       label: "Email",
       placeholder: "Enter your email",
@@ -40,7 +46,7 @@ export function useFormModule(
       autoCapitalize: "none",
     },
     passwordField: {
-      control: shared.form!.control,
+      control: form.control,
       name: "password",
       label: "Password",
       placeholder: "Enter your password",
