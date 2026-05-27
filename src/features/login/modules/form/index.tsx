@@ -6,11 +6,10 @@ import { ThemedButton } from "@/components/themed-button";
 import { ThemedTextField } from "@/components/themed-text-field";
 import { ThemedView } from "@/components/themed-view";
 
-import { LoginLinksRow } from "../login-links";
 import { styles } from "./styles";
 import { FormModuleProps } from "./types";
 
-/** Renders email/password fields, submit button, and link row. */
+/** Renders email/password fields and submit button. */
 export function FormModule(props: FormModuleProps) {
   const { emailField, passwordField, submitButton, error = "" } = props;
   const passwordRef = useRef<TextInput>(null);
@@ -63,8 +62,6 @@ export function FormModule(props: FormModuleProps) {
         loading={submitButton.loading}
         onPress={submitButton.onPress}
       />
-
-      <LoginLinksRow />
     </ThemedView>
   );
 }
