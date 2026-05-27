@@ -18,7 +18,7 @@ import { Spacing } from "@/constants/theme";
 import { AuthProvider } from "@/hooks/use-auth/provider";
 import { useFeatureFlags } from "@/hooks/use-feature-flags";
 import { FeatureFlagsProvider } from "@/hooks/use-feature-flags/provider";
-import { useThemeContext } from "@/hooks/use-theme/context";
+import { ThemePreference, useThemeContext } from "@/hooks/use-theme/context";
 import { ThemeProvider } from "@/hooks/use-theme/provider";
 
 /**
@@ -61,6 +61,13 @@ interface DevMenuContentProps {
  */
 function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
   const { flags } = useFeatureFlags();
+  const { theme, setTheme } = useThemeContext();
+
+  const cycleTheme = () => {
+    const order: ThemePreference[] = ["light", "dark", "system"];
+    const next = order[(order.indexOf(theme) + 1) % order.length];
+    setTheme(next);
+  };
 
   return (
     <>
@@ -76,6 +83,22 @@ function DevMenuContent({ onNavigateToStorybook }: DevMenuContentProps) {
           </ThemedText>
         </Pressable>
       )}
+      <Pressable
+        accessibilityRole="button"
+        onPress={cycleTheme}
+        style={styles.row}
+      >
+        <ThemedIcon
+          name={
+            theme === "dark" ? "moon" : theme === "light" ? "sunny" : "contrast"
+          }
+          themeColor="primary"
+          size="medium"
+        />
+        <ThemedText type="subtitle" themeColor="onSurface">
+          Theme: {theme}
+        </ThemedText>
+      </Pressable>
     </>
   );
 }
