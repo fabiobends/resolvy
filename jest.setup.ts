@@ -10,6 +10,15 @@ const mockScrollView = ScrollView;
 const mockPressable = Pressable;
 const mockText = Text;
 
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  __esModule: true,
+  default: {
+    getItem: jest.fn(() => Promise.resolve(null)),
+    setItem: jest.fn(() => Promise.resolve()),
+    removeItem: jest.fn(() => Promise.resolve()),
+  },
+}));
+
 jest.mock("@expo/vector-icons", () => ({
   Ionicons: function MockIonicons(props) {
     const name = props.name ?? "";
@@ -87,3 +96,42 @@ jest.mock("react-native-reanimated", () => ({
   createAnimatedPropAdapter: () => ({}),
   processColor: (color) => color,
 }));
+
+jest.mock("react-i18next", () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { en } = require("./src/localization/en");
+
+  const flatten = (obj, prefix = "", res = {}) => {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const path = prefix ? `${prefix}.${key}` : key;
+        if (typeof obj[key] === "object" && obj[key] !== null) {
+          flatten(obj[key], path, res);
+        } else {
+          res[path] = obj[key];
+        }
+      }
+    }
+    return res;
+  };
+  const flat = flatten(en);
+
+  return {
+    useTranslation: () => ({
+      t: (key, options) => {
+        let val = flat[key] ?? key;
+        if (typeof val === "string" && options) {
+          Object.entries(options).forEach(([k, v]) => {
+            val = val.replace(new RegExp(`{{${k}}}`, "g"), String(v));
+          });
+        }
+        return val;
+      },
+      i18n: { changeLanguage: jest.fn(), language: "en" },
+    }),
+    I18nextProvider: function I18nextProvider({ children }) {
+      return mockReact.createElement(mockReact.Fragment, null, children);
+    },
+    initReactI18next: { type: "3rdParty", init: jest.fn() },
+  };
+});
