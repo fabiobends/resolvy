@@ -23,18 +23,24 @@ description: Generate a new feature/screen following the Resolvy composition pat
    }
    ```
 
-3. The **screen component** (`screen.tsx`):
+3. Register the route in `src/app/_layout.tsx` when it lives inside a group or needs custom options (e.g. `headerShown: false`):
+
+   ```tsx
+   <Stack.Screen name="(auth)/<route>" options={{ headerShown: false }} />
+   ```
+
+4. The **screen component** (`screen.tsx`):
    - Is pure UI — no hooks except the screen hook
    - Spreads props from the screen hook into child module components
    - Uses named export (no default export)
    - Wraps content in `<ThemedView color="surface">` or `<SafeAreaView>` as needed
 
-4. The **screen hook** (`use-screen.ts`):
+5. The **screen hook** (`use-screen.ts`):
    - Acts as the orchestrator — **only** composes module hooks and wires shared state
    - Must stay thin: no direct business logic, no `useEffect`, no fetch calls
    - Returns a flat object whose keys map to child module component props
 
-5. **Shared state** — when two or more modules need to share behavior, the screen hook composes the shared state and passes relevant slices to each module via arguments:
+6. **Shared state** — when two or more modules need to share behavior, the screen hook composes the shared state and passes relevant slices to each module via arguments:
 
    ```ts
    // src/features/home/use-screen.ts
@@ -50,7 +56,7 @@ description: Generate a new feature/screen following the Resolvy composition pat
 
    Modules never import or reference each other — the screen hook is the sole coordinator.
 
-6. For each child section, create a **module** folder under `modules/` (see the **create-module** skill):
+7. For each child section, create a **module** folder under `modules/` (see the **create-module** skill):
    - `index.tsx` — component
    - `use-module.ts` — hook with business logic
    - `types.ts` — prop interfaces
@@ -59,13 +65,13 @@ description: Generate a new feature/screen following the Resolvy composition pat
    - `stories.tsx` — Storybook stories (flat name, not `Something.stories.tsx`)
    - `index.test.tsx` — unit test for UI
 
-7. Use `FontSizes` / `LineHeights` for text dimensions, `Spacing` for padding/margin/borderRadius/gap, `Sizes` for width/height, and resolved colors from `useTheme()`. Use `<ThemedText type="..." themeColor="...">` for all text — never apply `fontSize` or `fontWeight` via `style`.
+8. Use `FontSizes` / `LineHeights` for text dimensions, `Spacing` for padding/margin/borderRadius/gap, `Sizes` for width/height, and resolved colors from `useTheme()`. Use `<ThemedText type="..." themeColor="...">` for all text — never apply `fontSize` or `fontWeight` via `style`.
 
    **Never use raw React Native primitives** (`View`, `Text`) directly in module components or screens. Always use the corresponding themed wrappers (`<ThemedView themeColor="...">`, `<ThemedText type="..." themeColor="...">`) so colors stay consistent and theme-aware.
 
-8. No barrel files, no default exports, no hard-coded values.
+9. No barrel files, no default exports, no hard-coded values.
 
-9. **Never** combine token values with arithmetic (`sizes.small / 2`, `spacing.large * 2`, etc.). Choose the closest existing token from the correct scale instead.
+10. **Never** combine token values with arithmetic (`sizes.small / 2`, `spacing.large * 2`, etc.). Choose the closest existing token from the correct scale instead.
 
 ---
 
