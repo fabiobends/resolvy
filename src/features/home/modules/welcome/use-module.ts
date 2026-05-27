@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { WelcomeProps } from "./types";
 
@@ -7,11 +8,12 @@ import { WelcomeProps } from "./types";
  * @returns Props for the welcome component.
  */
 export function useWelcomeModule(): WelcomeProps {
+  const { t } = useTranslation();
   return useMemo(
     () => ({
-      title: "Welcome",
-      subtitle: "Resolvy",
+      title: t("home.welcomeTitle"),
+      subtitle: t("home.welcomeSubtitle"),
     }),
-    [],
+    [t],
   );
 }
