@@ -2,6 +2,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { KeyboardScrollView } from "@/components/keyboard-scroll-view";
 import { KeyboardToolbarView } from "@/components/keyboard-toolbar-view";
+import { LoginLinksRow } from "./modules/login-links";
 import { FormModule } from "./modules/form";
 import { LogoModule } from "./modules/logo";
 import { SocialModule } from "./modules/social";
@@ -17,6 +18,7 @@ import { useLoginScreen } from "./use-screen";
 export function LoginScreenView({
   logoProps,
   formProps,
+  linksProps,
   socialProps,
 }: LoginScreenProps) {
   return (
@@ -27,6 +29,7 @@ export function LoginScreenView({
       >
         <LogoModule {...logoProps} />
         <FormModule {...formProps} />
+        <LoginLinksRow {...linksProps} />
         <SocialModule {...socialProps} />
       </KeyboardScrollView>
       <KeyboardToolbarView onDonePress={formProps.submitButton.onPress} />

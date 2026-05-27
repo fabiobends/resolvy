@@ -54,6 +54,10 @@ export const Default: Story = {
   render: () => (
     <ScreenStory
       logoProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
+      linksProps={{
+        onForgotPasswordPress: () => {},
+        onCreateAccountPress: () => {},
+      }}
       formProps={{
         submitButton: {
           title: "Log in",
@@ -70,6 +74,10 @@ export const Loading: Story = {
   render: () => (
     <ScreenStory
       logoProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
+      linksProps={{
+        onForgotPasswordPress: () => {},
+        onCreateAccountPress: () => {},
+      }}
       formProps={{
         submitButton: {
           title: "Log in",
@@ -86,6 +94,10 @@ export const WithError: Story = {
   render: () => (
     <ScreenStory
       logoProps={{ title: "Resolvy", subtitle: "Resolve what matters" }}
+      linksProps={{
+        onForgotPasswordPress: () => {},
+        onCreateAccountPress: () => {},
+      }}
       formProps={{
         submitButton: {
           title: "Log in",
