@@ -1,5 +1,6 @@
 import { ThemedLink } from "@/components/themed-link";
 import { ThemedView } from "@/components/themed-view";
+import { useTranslation } from "react-i18next";
 
 import { styles } from "./styles";
 import { LoginLinksRowProps } from "./types";
@@ -9,15 +10,16 @@ export function LoginLinksRow({
   onForgotPasswordPress,
   onCreateAccountPress,
 }: LoginLinksRowProps) {
+  const { t } = useTranslation();
   return (
     <ThemedView themeColor="surface" style={styles.linksRow}>
       <ThemedLink
-        title="Forgot password?"
+        title={t("login.forgotPassword")}
         color="primary"
         onPress={onForgotPasswordPress}
       />
       <ThemedLink
-        title="Create account"
+        title={t("login.createAccount")}
         color="primary"
         onPress={onCreateAccountPress}
       />

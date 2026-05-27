@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { LogoModuleProps } from "./types";
 
 /**
@@ -5,5 +7,6 @@ import { LogoModuleProps } from "./types";
  * @returns Logo module props with title only.
  */
 export function useLogoModule(): LogoModuleProps {
-  return { title: "Resolvy" };
+  const { t } = useTranslation();
+  return { title: t("signup.title") };
 }

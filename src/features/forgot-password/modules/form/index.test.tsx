@@ -4,15 +4,6 @@ import { fireEvent, render, screen } from "@testing-library/react-native";
 import { ForgotPasswordFormData } from "../../schema";
 import { FormModule } from "./index";
 
-jest.mock("@react-native-async-storage/async-storage", () => ({
-  __esModule: true,
-  default: {
-    getItem: jest.fn(() => Promise.resolve(null)),
-    setItem: jest.fn(() => Promise.resolve()),
-    removeItem: jest.fn(() => Promise.resolve()),
-  },
-}));
-
 function TestFormModule(props: {
   error?: string;
   infoBanner: string;
