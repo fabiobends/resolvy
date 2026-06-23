@@ -2,6 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { mapAuthError } from "@/services/auth";
+
 import { useSignupMutation } from "./use-signup-mutation";
 import { SignupFormData, signupSchema } from "../../schema";
 import { FormModuleProps } from "./types";
@@ -60,6 +62,8 @@ export function useFormModule(): FormModuleProps {
       onPress: onSubmit,
       loading: signupMutation.isPending,
     },
-    error: signupMutation.error?.message,
+    error: signupMutation.error
+      ? mapAuthError(signupMutation.error, t)
+      : undefined,
   };
 }

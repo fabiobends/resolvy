@@ -1,11 +1,6 @@
 import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 
-import {
-  AuthUser,
-  getCurrentUser,
-  signOut,
-  subscribeToAuthState,
-} from "@/features/login/services/auth";
+import { AuthUser, signOut, subscribeToAuthState } from "@/services/auth";
 
 import { AuthContext } from "./context";
 
@@ -15,9 +10,11 @@ interface AuthProviderProps {
 }
 
 /**
- * Provides auth state and handles subscription to auth changes.
- * Login is performed directly through the auth service, not via this context.
- * State updates reactively via the subscription.
+ * Provides auth state by subscribing to Firebase's onAuthStateChanged stream.
+ * The first emit restores the persisted user (Firebase AUTH_PERSISTENCE.LOCAL
+ * default = automatic keep-me-logged-in) and flips isReady, so there is no
+ * separate getCurrentUser-on-mount call. State updates reactively via the
+ * subscription; login is performed directly through the auth service.
  * @param props - Provider props.
  * @returns React element.
  */
@@ -28,23 +25,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     let mounted = true;
 
-    getCurrentUser().then((initialUser) => {
-      if (!mounted) return;
-      setUser(initialUser);
-      setIsReady(true);
-    });
-
     const unsubscribe = subscribeToAuthState((nextUser) => {
       if (!mounted) return;
       setUser(nextUser);
-      if (!isReady) setIsReady(true);
+      setIsReady(true);
     });
 
     return () => {
       mounted = false;
       unsubscribe();
     };
-  }, [isReady]);
+  }, []);
 
   const logout = useCallback(async () => {
     await signOut();

@@ -8,7 +8,13 @@ import { SocialModuleProps } from "./types";
 
 /** Renders divider and vendor-agnostic social login buttons. */
 export function SocialModule(props: SocialModuleProps) {
-  const { onGooglePress, onApplePress, googleLoading, appleLoading } = props;
+  const {
+    onGooglePress,
+    onApplePress,
+    googleLoading,
+    appleLoading,
+    isAppleAvailable,
+  } = props;
   const { t } = useTranslation();
 
   return (
@@ -27,14 +33,16 @@ export function SocialModule(props: SocialModuleProps) {
           onPress={onGooglePress}
           loading={googleLoading}
         />
-        <ThemedIconButton
-          name="logo-apple"
-          backgroundThemeColor="surfaceBright"
-          foregroundThemeColor="onSurface"
-          size="medium"
-          onPress={onApplePress}
-          loading={appleLoading}
-        />
+        {isAppleAvailable && (
+          <ThemedIconButton
+            name="logo-apple"
+            backgroundThemeColor="surfaceBright"
+            foregroundThemeColor="onSurface"
+            size="medium"
+            onPress={onApplePress}
+            loading={appleLoading}
+          />
+        )}
       </ThemedView>
     </ThemedView>
   );

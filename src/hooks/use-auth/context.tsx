@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { AuthUser } from "@/features/login/services/auth";
+import { AuthUser } from "@/services/auth";
 
 /** Value provided by the AuthContext. */
 export interface AuthContextValue {

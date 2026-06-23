@@ -65,7 +65,11 @@ export const Default: Story = {
           loading: false,
         },
       }}
-      socialProps={{ onGooglePress: () => {}, onApplePress: () => {} }}
+      socialProps={{
+        onGooglePress: () => {},
+        onApplePress: () => {},
+        isAppleAvailable: true,
+      }}
     />
   ),
 };
@@ -85,7 +89,11 @@ export const Loading: Story = {
           loading: true,
         },
       }}
-      socialProps={{ onGooglePress: () => {}, onApplePress: () => {} }}
+      socialProps={{
+        onGooglePress: () => {},
+        onApplePress: () => {},
+        isAppleAvailable: true,
+      }}
     />
   ),
 };
@@ -106,7 +114,11 @@ export const WithError: Story = {
         },
         error: "Invalid credentials",
       }}
-      socialProps={{ onGooglePress: () => {}, onApplePress: () => {} }}
+      socialProps={{
+        onGooglePress: () => {},
+        onApplePress: () => {},
+        isAppleAvailable: true,
+      }}
     />
   ),
 };

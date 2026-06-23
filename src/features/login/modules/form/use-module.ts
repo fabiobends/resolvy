@@ -2,6 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { mapAuthError } from "@/services/auth";
+
 import { useLoginMutation } from "./use-login-mutation";
 import { LoginFormData, loginSchema } from "../../schema";
 import { FormModuleProps } from "./types";
@@ -46,6 +48,8 @@ export function useFormModule(): FormModuleProps {
       onPress: onSubmit,
       loading: loginMutation.isPending,
     },
-    error: loginMutation.error?.message,
+    error: loginMutation.error
+      ? mapAuthError(loginMutation.error, t)
+      : undefined,
   };
 }

@@ -3,7 +3,7 @@ import { renderHook, waitFor } from "@testing-library/react-native";
 
 import { useLoginMutation } from "./use-login-mutation";
 
-jest.mock("../../services/auth", () => ({
+jest.mock("@/services/auth", () => ({
   login: jest.fn((credentials) =>
     Promise.resolve({ id: "stub-user-id", email: credentials.email }),
   ),

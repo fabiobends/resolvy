@@ -6,7 +6,7 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Constants, { ExecutionEnvironment } from "expo-constants";
 import { Stack, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { I18nextProvider, useTranslation } from "react-i18next";
@@ -22,6 +22,7 @@ import { FeatureFlagsProvider } from "@/hooks/use-feature-flags/provider";
 import { ThemePreference, useThemeContext } from "@/hooks/use-theme/context";
 import { ThemeProvider } from "@/hooks/use-theme/provider";
 import i18n from "@/localization/i18n";
+import { configureGoogleSignIn } from "@/services/auth";
 
 /**
  * True when running in Expo Go, a development build, or local bare build.
@@ -41,12 +42,7 @@ function NavigationTheme() {
     >
       <Stack>
         <Stack.Screen name="(main)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="(auth)/forgot-password"
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack>
     </NavigationThemeProvider>
   );
@@ -159,6 +155,12 @@ function DevTools() {
  * @returns React element.
  */
 export default function RootLayout() {
+  // Configure native Google Sign-In once at boot before any Google tap,
+  // else the first tap throws DEVELOPER_ERROR.
+  useEffect(() => {
+    configureGoogleSignIn();
+  }, []);
+
   return (
     <KeyboardProvider>
       <I18nextProvider i18n={i18n}>

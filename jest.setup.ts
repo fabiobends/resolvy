@@ -135,3 +135,68 @@ jest.mock("react-i18next", () => {
     initReactI18next: { type: "3rdParty", init: jest.fn() },
   };
 });
+
+// Native auth modules — stubbed so src/services/auth can be imported in tests.
+jest.mock("@react-native-firebase/app", () => ({
+  __esModule: true,
+  default: {},
+}));
+
+jest.mock("@react-native-firebase/auth", () => {
+  const makeUser = () => ({
+    uid: "mock-uid",
+    email: "mock@example.com",
+    displayName: null,
+    photoURL: null,
+    providerData: [{ providerId: "password" }],
+    updateProfile: jest.fn(),
+    updateEmail: jest.fn(),
+    reload: jest.fn(),
+  });
+  const authInstance = {
+    signInWithEmailAndPassword: jest.fn(async () => ({ user: makeUser() })),
+    createUserWithEmailAndPassword: jest.fn(async () => ({ user: makeUser() })),
+    sendPasswordResetEmail: jest.fn(async () => {}),
+    signOut: jest.fn(async () => {}),
+    onAuthStateChanged: jest.fn((cb: (u: unknown) => void) => {
+      cb(null);
+      return () => {};
+    }),
+    signInWithCredential: jest.fn(async () => ({ user: makeUser() })),
+    currentUser: null,
+  };
+  const authFn = () => authInstance;
+  (authFn as { GoogleAuthProvider: unknown }).GoogleAuthProvider = {
+    credential: jest.fn(() => ({})),
+  };
+  (authFn as { AppleAuthProvider: unknown }).AppleAuthProvider = {
+    credential: jest.fn(() => ({})),
+  };
+  return { __esModule: true, default: authFn };
+});
+
+jest.mock("@react-native-google-signin/google-signin", () => ({
+  __esModule: true,
+  GoogleSignin: {
+    configure: jest.fn(),
+    signIn: jest.fn(async () => ({ idToken: "mock-id-token" })),
+    getTokens: jest.fn(async () => ({
+      idToken: "mock-id-token",
+      accessToken: "mock-access-token",
+    })),
+  },
+}));
+
+jest.mock("@invertase/react-native-apple-authentication", () => ({
+  __esModule: true,
+  appleAuth: {
+    Operation: { LOGIN: "LOGIN" },
+    Scope: { FULL_NAME: "FULL_NAME", EMAIL: "EMAIL" },
+    performRequest: jest.fn(async () => ({
+      identityToken: "mock-identity-token",
+      nonce: "mock-nonce",
+      fullName: null,
+      email: null,
+    })),
+  },
+}));

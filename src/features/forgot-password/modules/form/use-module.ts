@@ -2,6 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { mapAuthError } from "@/services/auth";
+
 import { useRequestPasswordResetMutation } from "./use-request-password-reset-mutation";
 import { ForgotPasswordFormData, forgotPasswordSchema } from "../../schema";
 import { FormModuleProps } from "./types";
@@ -42,7 +44,9 @@ export function useFormModule(): FormModuleProps {
       onPress: onSubmit,
       loading: resetMutation.isPending,
     },
-    error: resetMutation.error?.message,
+    error: resetMutation.error
+      ? mapAuthError(resetMutation.error, t)
+      : undefined,
     infoBanner: t("forgotPassword.infoBanner"),
   };
 }

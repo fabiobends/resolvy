@@ -25,6 +25,22 @@ export const en = {
     switchToLightMode: "Switch to light mode",
     switchToDarkMode: "Switch to dark mode",
   },
+  auth: {
+    errors: {
+      invalidEmail: "That email address is invalid.",
+      invalidCredential: "The email or password is incorrect.",
+      userDisabled: "This account has been disabled.",
+      userNotFound: "No account found with these credentials.",
+      wrongPassword: "The email or password is incorrect.",
+      emailAlreadyInUse: "An account already exists with this email.",
+      operationNotAllowed: "This sign-in method is not enabled.",
+      weakPassword: "Please choose a stronger password.",
+      network: "Network error. Check your connection and try again.",
+      tooManyRequests: "Too many attempts. Try again later.",
+      cancelled: "Sign-in was cancelled.",
+      unknown: "Something went wrong. Please try again.",
+    },
+  },
   login: {
     title: "Resolvy",
     subtitle: "Resolve what matters",

@@ -19,6 +19,22 @@ export const pt = {
     switchToLightMode: "Mudar para modo claro",
     switchToDarkMode: "Mudar para modo escuro",
   },
+  auth: {
+    errors: {
+      invalidEmail: "Esse endereço de e-mail é inválido.",
+      invalidCredential: "O e-mail ou a senha estão incorretos.",
+      userDisabled: "Esta conta foi desativada.",
+      userNotFound: "Nenhuma conta encontrada com essas credenciais.",
+      wrongPassword: "O e-mail ou a senha estão incorretos.",
+      emailAlreadyInUse: "Já existe uma conta com este e-mail.",
+      operationNotAllowed: "Este método de login não está ativado.",
+      weakPassword: "Escolha uma senha mais forte.",
+      network: "Erro de rede. Verifique sua conexão e tente novamente.",
+      tooManyRequests: "Muitas tentativas. Tente novamente mais tarde.",
+      cancelled: "Login cancelado.",
+      unknown: "Algo deu errado. Tente novamente.",
+    },
+  },
   login: {
     title: "Resolvy",
     subtitle: "Resolva o que importa",
